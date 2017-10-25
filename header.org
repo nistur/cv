@@ -1,0 +1,13 @@
+#+MACRO: FIRST    Philipp
+#+MACRO: LAST     Geyer
+#+MACRO: FULL     {{{FIRST}}} {{{LAST}}}
+#+MACRO: BLOG     http://nistur.com
+#+MACRO: EMAIL    philipp@geyer.co.uk
+#+MACRO: PHONE    +44 798 453 80 13
+#+MACRO: CODE     https://github.com/nistur
+#+MACRO: ADDRESS1 Coventry
+#+MACRO: ADDRESS2 United Kingdom
+
+#+MACRO: HEADER \resheader{ {{{FULL}}} }{ {{{BLOG}}} }{ {{{EMAIL}}} }{ {{{PHONE}}} }{ {{{ADDRESS1}}} }{ {{{ADDRESS2}}} }
+
+{{{HEADER}}}

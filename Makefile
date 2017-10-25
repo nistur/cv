@@ -1,0 +1,51 @@
+#PDF output directory
+OUT_DIR=out/pdf/
+#Directory to copy intermediate LaTeX files to
+OBJ_DIR=out/tex/
+#auxiliary files which pdflatex outputs --- Don't actually know what these are, but I don't need them
+AUX_DIR=out/aux/
+#use line below if want to compile all org files, CV just uses one which includes others
+#FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
+FILES=$(OUT_DIR)/cv.pdf
+
+.PHONY: all clean install-doc
+
+all: install-doc
+
+install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(FILES)
+
+$(OBJ_DIR):
+	mkdir -v -p $(OBJ_DIR)
+
+$(OUT_DIR):
+	mkdir -v -p $(OUT_DIR)
+
+$(AUX_DIR):
+	mkdir -v -p $(AUX_DIR)
+
+%.tex: %.org
+	@echo "Converting org-mode file $< to LaTeX"
+	@emacs $< --batch -f org-latex-export-to-latex --kill
+
+%.pdf: %.tex
+	@echo "Converting LaTeX file $< to PDF"
+	@pdflatex $< > /dev/null
+	@echo "Tidying output..."
+	@install -m 644 -t $(OBJ_DIR) $<
+	@install -m 644 -t $(AUX_DIR) $(<:.tex=.aux)
+	@install -m 644 -t $(AUX_DIR) $(<:.tex=.log)
+	@install -m 644 -t $(AUX_DIR) $(<:.tex=.out)
+	@rm -fr $<
+	@rm -fr $(<:.tex=.aux)
+	@rm -fr $(<:.tex=.log)
+	@rm -fr $(<:.tex=.out)
+
+$(OUT_DIR)/%.pdf: %.pdf
+	@install -m 644 -t $(OUT_DIR) $<
+	@rm $<
+
+clean:
+	@echo "Cleaning output directories"
+	@rm -fr $(OUT_DIR)/*.pdf
+	@rm -fr $(AUX_DIR)/*
+	@rm -fr $(OBJ_DIR)/*.tex
