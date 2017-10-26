@@ -1,13 +1,149 @@
-#+OPTIONS: toc:nil H:10 tex:t
+#+OPTIONS: toc:nil H:10 tex:t date:nil
+#+TITLE: Curriculum Vitae
 #+STARTUP: hidestars indent
 #+LaTeX_HEADER: \usepackage{mycv}
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, urlcolor={url-gray}}
-#+LaTeX_CLASS_OPTIONS: [letterpaper]
+#+LaTeX_CLASS_OPTIONS: [8pt]
 
 #+INCLUDE: header.org
-#+INCLUDE: personal.org
-#+INCLUDE: experience.org
-#+INCLUDE: skills.org
-#+INCLUDE: education.org
-#+INCLUDE: language.org
-#+INCLUDE: hobbies.org
+
+* Personal Information
+I am a confident and competent programmer with a keen interest in making video games. I have had experience both
+developing and using many different platforms and environments. I have worked well in teams of various sizes with multiple disciplines.
+I am a keen problem solver, enjoy investigating how things work and relish a challenge.
+
+* Experience
+** Pixel Toys
+
+August 2017 until present
+
+Contract programmer helping with porting existing project to tvOS.
+
++ Freeblade (C#/Unity3D)
+
+Also worked architecting system to migrate existing cloud save data on
+iOS to new format while maintaining high confidence that no data would
+be lost.
+
+** Viewpoint Games
+June 2016 until present
+
+Senior Programmer on several projects, and prototypes. Design,
+architect and implement game from conception to release, including AI,
+gameplay and optimisation for VR titles, both for mobile VR and for
+consoles.
+
++ Hungry Shark VR (C#/Unity3D)
++ Ghosts in the Toybox (C#/Unity3D)
+
+Led multidisciplinary development team through the lifetime of the project.
+ 
+** FreeStyleGames
+May 2013 until May 2016
+
+Software engineer on several projects, providing user interface, gameplay and systems
+architecture.
+
++ Guitar Hero Live (C++)
++ Guitar Hero Live Companion App (C#/Unity3D)
++ Call of Duty: Online (Actionscript)
++ Call of Duty: Ghosts Companion App (C#/Unity3D)
+
+Also worked on a small R&D team exploring different project ideas using a variety of
+technologies, such as Virtual Reality, absolute positional controllers, and motion detecting
+cameras. 
+** AppToyz
+January 2013 until May 2013
+
+Lead software engineer on four iOS and Android projects. (C#/C++/Unity3D/Cocos2DX)
+** Ideaworks Game Studio
+May 2010 until January 2013
+
+Software engineer on major iOS titles, providing User Interface programming as well as
+gameplay, graphics and system architecture. Have worked closely with designers and artists
+to create usable workflows when creating the games.
+
++ Lara Croft and the Guardian of Light (C++) http://nistur.com/pg-cv01
++ Backbreaker 2: Vengeance (C++) http://nistur.com/pg-cv02
++ Transformers 3: Dark of the Moon (C++) http://nistur.com/pg-cv03
++ Call of Duty Black Ops: Zombies (C++) http://nistur.com/pg-cv04
++ Wipeout (C#/Unity3D) http://nistur.com/pg-cv05
+
+* Skills
+
++ Experience developing for a range of platforms including mobile, games consoles and desktop.
++ Experience developing VR titles for mobile, standalone, desktop and console platforms.
++ Confident using Windows, macOS, and Linux systems.
++ Experience using a variety of game engines and frameworks such as
+  Unity3D, Marmalade, Maratis3D, Instinct, Sauerbraten, Oops!
+  Framework, XNA and Ogre.
++ Experience on commercial titles with various programming languages
+  such as:
+  + C/C++, Objective C, C#, Java, Lua, Python.
++ Experience using various programming languages for personal project:
+  + C/C++, Java, Lua, Python, Haskell, Lisp, Ruby, ASM.
+* Education
+** University of Abertay, Dundee
+2006 until 2010
+BSC (Hons) Computer Games Technology - Lower Second class Honours
+degree
++ Fourth Year (Honours)
+  + Honours project topic: "Can information dissipate over time to
+    create a dynamic social environment to aid in game immersion?" http://tiara.nistur.com
+  + Also studied network programming, artificial intelligence and
+    advanced game techniques.
++ Third Year
+  + Studied mathematics, graphics programming using DirectX, games
+    tool programming using Lex/Yacc, dynamic terrain generation, 3D
+    console development using PS2, sound programming for games using
+    DirectSound and a multidisciplinary group project.
++ Second Year
+  + Studied mathematics, 2D console programming using PS2, 2D graphics
+    programming using Windows API, 3D graphics programming using
+    OpenGL and Japanese Language and Culture.
++ First Year
+  + Studied mathematics, programming in C++, console development and
+    architecture using Game Boy Advance, 3D media production using
+    Milkshape 3D, Sound production using Soundforge and Cubase and
+    prototype game development using Adobe Flash.
+
+* Language Skills
+I am a native English speaker and have learned other languages in the
+past. At this point I can still understand most German, Dutch and
+French, however through lack of use I am not particularly fluent in
+speaking it. I have also begun learning Russian, however have not yet
+progressed beyond a beginner level.
+
+* Hobbies and Interests
+
+** Programming
+I have enjoyed experimenting with programming and development in my
+free time from the age of 9. I have enjoyed having projects I can work
+on which keep me thinking of new ways to tackle problems. Quite often
+these will lead me to experiment with new technology or languages. I
+contributed to the Open Source game engine Maratis 3D. I have also
+started a number of small projects whose aim is to experiment in
+approaching different programming projects which have become a
+collection of "Tiny Little" libraries.
+
+http://nistur.com/projects/libraries
+
+** Playing Games
+In what free time I have available, I have always enjoyed playing
+games to relax. My taste in games is fairly broad, ranging from games
+released when I was younger (and before!) to modern games. Some of my
+favourites are Role Play Games such as the Final Fantasy, and The
+Elder Scrolls series' and Space Simulations such as the X series, and
+Freespace.
+
+** Reading
+As well as programming related books, I enjoy reading fiction, usually
+either science fiction or fantasy.
+
+** Travel
+I enjoy visiting new places, learning about different cultures and
+languages, and meeting new people.
+
+* 
+If there are any further questions, feel free to contact me on the
+details above.
