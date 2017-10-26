@@ -3,7 +3,7 @@
 #+STARTUP: hidestars indent
 #+LaTeX_HEADER: \usepackage{mycv}
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, urlcolor={url-gray}}
-#+LaTeX_CLASS_OPTIONS: [a4paper,10pt]
+#+LaTeX_CLASS_OPTIONS: [a4paper,9pt]
 
 #+INCLUDE: header.org
 
@@ -13,7 +13,7 @@ developing and using many different platforms and environments. I have worked we
 I am a keen problem solver, enjoy investigating how things work and relish a challenge.
 
 * Experience
-** Pixel Toys
+** Contract Programmer, Pixel Toys
 
 August 2017 until present
 
@@ -21,11 +21,11 @@ Contract programmer helping with porting existing project to tvOS.
 
 + Freeblade (C#/Unity3D)
 
-Also worked architecting system to migrate existing cloud save data on
-iOS to new format while maintaining high confidence that no data would
-be lost.
+Also worked on architecting a system to migrate existing cloud save
+data on iOS to new format while maintaining high confidence that no
+data would be lost.
 
-** Viewpoint Games
+** Senior Programmer, Viewpoint Games
 June 2016 until present
 
 Senior Programmer on several projects, and prototypes. Design,
@@ -38,7 +38,7 @@ consoles.
 
 Led multidisciplinary development team through the lifetime of the project.
  
-** FreeStyleGames
+** Programmer, FreeStyleGames
 May 2013 until May 2016
 
 Software engineer on several projects, providing user interface, gameplay and systems
@@ -52,11 +52,13 @@ architecture.
 Also worked on a small R&D team exploring different project ideas using a variety of
 technologies, such as Virtual Reality, absolute positional controllers, and motion detecting
 cameras. 
-** AppToyz
+** Programmer, AppToyz
 January 2013 until May 2013
 
-Lead software engineer on four iOS and Android projects. (C#/C++/Unity3D/Cocos2DX)
-** Ideaworks Game Studio
+Lead software engineer on four iOS and Android
+projects. (C#/C++/Unity3D/Cocos2DX)
+
+** Programmer, Ideaworks Game Studio
 May 2010 until January 2013
 
 Software engineer on major iOS titles, providing User Interface programming as well as
@@ -108,11 +110,7 @@ degree
     prototype game development using Adobe Flash.
 
 * Language Skills
-I am a native English speaker and have learned other languages in the
-past. At this point I can still understand most German, Dutch and
-French, however through lack of use I am not particularly fluent in
-speaking it. I have also begun learning Russian, however have not yet
-progressed beyond a beginner level.
+English: Native, German: Advanced, Dutch: Intermediate, French: Intermediate
 
 * Hobbies and Interests
 

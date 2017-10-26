@@ -23,6 +23,8 @@
 \addtolength{\textheight}{1in}
 % >>>
 
+\pagenumbering{gobble}
+
 % <<< other definitions
 \definecolor{highlight-colour}{RGB}{128, 0, 0}
 \definecolor{url-gray}{gray}{0.25}
@@ -49,7 +51,7 @@
     \large \textcolor{highlight-colour}{
       \begin{minipage}
         {\textwidth-0.175in}
-        {\textbf{#1 \vphantom{p\^{E}}}}
+        {\textbf{\newline#1 \vphantom{p\^{E}}}}
       \end{minipage}
     }
   }
