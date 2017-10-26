@@ -3,7 +3,7 @@
 #+STARTUP: hidestars indent
 #+LaTeX_HEADER: \usepackage{mycv}
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, urlcolor={url-gray}}
-#+LaTeX_CLASS_OPTIONS: [8pt]
+#+LaTeX_CLASS_OPTIONS: [a4paper,10pt]
 
 #+INCLUDE: header.org
 
