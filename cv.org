@@ -15,7 +15,7 @@ I am a keen problem solver, enjoy investigating how things work and relish a cha
 * Experience
 ** Contract Programmer, Pixel Toys
 
-August 2017 until present
+August 2017 until December 2017
 
 Contract programmer helping with porting existing project to tvOS.
 
@@ -26,7 +26,7 @@ data on iOS to new format while maintaining high confidence that no
 data would be lost.
 
 ** Senior Programmer, Viewpoint Games
-June 2016 until present
+June 2016 until October 2017
 
 Senior Programmer on several projects, and prototypes. Design,
 architect and implement game from conception to release, including AI,
