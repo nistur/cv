@@ -4,15 +4,17 @@ OUT_DIR=out/pdf/
 OBJ_DIR=out/tex/
 #auxiliary files which pdflatex outputs --- Don't actually know what these are, but I don't need them
 AUX_DIR=out/aux/
+#directory for executables
+BIN_DIR=out/bin/
 #use line below if want to compile all org files, CV just uses one which includes others
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
-FILES=$(OUT_DIR)/cv.pdf
+FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv
 
 .PHONY: all clean install-doc
 
 all: install-doc
 
-install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(FILES)
+install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(FILES)
 
 $(OBJ_DIR):
 	mkdir -v -p $(OBJ_DIR)
@@ -22,6 +24,9 @@ $(OUT_DIR):
 
 $(AUX_DIR):
 	mkdir -v -p $(AUX_DIR)
+
+$(BIN_DIR):
+	mkdir -v -p $(BIN_DIR)
 
 %.tex: %.org
 	@echo "Converting org-mode file $< to LaTeX"
@@ -44,8 +49,19 @@ $(OUT_DIR)/%.pdf: %.pdf
 	@install -m 644 -t $(OUT_DIR) $<
 	@rm $<
 
+src/cv.dat.h:
+	@sh ./embed.sh cv.org
+
+cv.out: src/cv.dat.h
+	@echo "Building executable"
+	@gcc -o $@ src/*.c
+
+$(BIN_DIR)/cv: cv.out
+	@mv $< $(BIN_DIR)/cv
+
 clean:
 	@echo "Cleaning output directories"
 	@rm -fr $(OUT_DIR)/*.pdf
 	@rm -fr $(AUX_DIR)/*
 	@rm -fr $(OBJ_DIR)/*.tex
+	@rm -fr $(BIN_DIR)/*
