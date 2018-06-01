@@ -9,6 +9,7 @@ BIN_DIR=out/bin/
 #use line below if want to compile all org files, CV just uses one which includes others
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
 FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv
+CFLAGS=-g
 
 .PHONY: all clean install-doc
 
@@ -54,7 +55,7 @@ src/cv.dat.h:
 
 cv.out: src/cv.dat.h
 	@echo "Building executable"
-	@gcc -o $@ src/*.c
+	@gcc -o $@ src/*.c $(CFLAGS)
 
 $(BIN_DIR)/cv: cv.out
 	@mv $< $(BIN_DIR)/cv

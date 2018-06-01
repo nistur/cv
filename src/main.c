@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "cv.org.h"
 
@@ -18,6 +19,13 @@ void printHelp(const char* name)
 	   "\n", name);
 }
 
+void printContact(void)
+{
+    printf("");
+}
+
+void lisp(void);
+
 #define CV_PARAGRAPH(NUM)				\
     optHandled = 1; printf("\n%s\n", cv_org##NUM);
 
@@ -26,7 +34,7 @@ int main(int argc, char** argv)
     int opt;
     char optHandled = 0;
     
-    while( (opt = getopt(argc, argv, "pesqlich")) != -1 )
+    while( (opt = getopt(argc, argv, "pesqlichL")) != -1 )
     {
 	switch( opt )
 	{	
@@ -43,7 +51,10 @@ int main(int argc, char** argv)
 	case 'i':
 	    CV_PARAGRAPH(05); break;
 	case 'c':
-	    break;
+	    optHandled = 1; printContact(); break;
+
+	case 'L':
+	    optHandled = 1; lisp(); break;
 	    
 	case 'h':
 	default:
