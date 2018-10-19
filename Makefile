@@ -10,6 +10,7 @@ BIN_DIR=out/bin/
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
 FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv
 CFLAGS=-g
+SILENT=2>/dev/null > /dev/null
 
 .PHONY: all clean install-doc
 
@@ -31,11 +32,11 @@ $(BIN_DIR):
 
 %.tex: %.org
 	@echo "Converting org-mode file $< to LaTeX"
-	@emacs $< --batch -f org-latex-export-to-latex --kill
+	@emacs $< --batch -f org-latex-export-to-latex --kill $(SILENT)
 
 %.pdf: %.tex
 	@echo "Converting LaTeX file $< to PDF"
-	@pdflatex $< > /dev/null
+	@pdflatex $< $(SILENT)
 	@echo "Tidying output..."
 	@install -m 644 -t $(OBJ_DIR) $<
 	@install -m 644 -t $(AUX_DIR) $(<:.tex=.aux)
