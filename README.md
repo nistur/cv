@@ -1,4 +1,5 @@
-* Curriculum Vitae
+Curriculum Vitae
+----------------
 
 This is my CV. It is provided in emacs org-mode. It is then exported with a LaTeX stylesheet through to PDF.
 
@@ -13,3 +14,5 @@ Tested software used to build the CV PDFs:
 
 In order to build the CV PDF:
 ```make```
+
+Also added to the repository now is a small C program that will provide the contents of the CV on the command line. This is currently just as a place where I can dump a few more code samples, rather than a complete project. It will also be built with ```make``` above, and can be invoked with ```out/bin/cv``` which will show the available flags. It also contains a very basic lisp interpreter, which currently does very little.
