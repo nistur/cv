@@ -16,6 +16,15 @@ I am a keen problem solver, enjoy investigating how things work and relish a cha
 ** Senior Programmer, Hugo Games
 February 2018 until present
 
+Senior programmer working on getting multiple free to play mobile
+titles to market. Lead development team and architected systems to
+support creative workflows.
+
++ Doodle Jump Space Chase (C#/Unity3D)
++ Vikings (C#/Unity3D)
+
+Refactored existing codebases to bring them up to standard, and
+introduced new procedures to ensure the highest quality code possible.
 
 ** Contract Programmer, Pixel Toys
 August 2017 until December 2017
