@@ -1,59 +1,139 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+// using stretchy buffers from nothings.org as it's a perfectly good
+// minimal solution, and I don't want to rewrite _everything_ from scratch
 #include "stretchy_buffer.h"
 
+//----------------------------------------------------------------------------//
+// Incredibly minimalist lisp                                                 //
+//----------------------------------------------------------------------------//
+// I am not sure why I've added a small lisp interpreter here, but I thought  //
+// it would be fun. It supports very little functionality, with more intended //
+// to be implemented in lisp itself. At this point it only supports a few     //
+// things:                                                                    //
+// println - output parameters followed by a new line                         //
+// set - set a variable to something                                          //
+// + - perform arithmetric summation between all parameters                   //
+// lambda - define a function                                                 //
+// ' - don't evaluate the following cell                                      //
+//----------------------------------------------------------------------------//
+// EXAMPLE                                                                    //
+// (set 'testValue 1)                                                         //
+// (set 'testFn lambda()                                                      //
+//      (println (set 'testValue (+ testValue 1))))                           //
+// (testFn)                                                                   //
+//----------------------------------------------------------------------------//
+
+
+//----------------------------------------------------------------------------//
+// Macros                                                                     //
+//----------------------------------------------------------------------------//
+// Allow current struct to be reference counted
+#define REFCOUNT ref_t _ref;
+// Release memory
+#define FREE(v) Free((cell_base_t*)v)
+// Increase reference count - hold reference to a struct
+#define RETAIN(_val) { ((ref_t*)_val)->_refCount += 1; }
+// Decrease reference count - Free memory if no references left
+#define RELEASE(_val) { if((((ref_t*)_val)->_refCount-= 1) <= 0) { FREE(_val); }}
+// Set a value to a given name-hash (prefer SET)
+#define _SET(XX,val) {sb_push(env->keys, XX); sb_push(env->vals, val); RETAIN(val);}
+// Set a value to a given name
+#define SET(name,val) _SET(hash(name), val) 
+// Get a named value
+#define GET(name) Get(env, hash(name))
+// Replace a named value with a new one
+#define REPLACE(name, val) Replace(env, hash(name), val);
+// Create a new cell of a given type with specific value
+#define CELL(t, v) _cell(t, (void*)v)
+// Create a new list
+#define LIST() (list_t*)CELL(LIST,0)
+// Create a new Lisp function
+#define FUNL() (fn_t*)CELL(FUNL,0)
+// Quote the following cell
+#define QUOTE() (list_t*)CELL(QUOT,0)
+// Push a value onto a list
+#define PUSH_BACK(list, val)						\
+    {									\
+	if( list->car == NULL ) { list->car = val; }			\
+	else if( list->cdr == NULL )					\
+	{								\
+	    list->cdr = val; list->car->next = val;			\
+	}								\
+	else								\
+	{								\
+	    cell_base_t* pCell = list->cdr;				\
+	    while( pCell->next != NULL ) pCell = pCell->next;		\
+	    pCell->next = val;						\
+	}								\
+    }
+// Pop a value off the list
+#define POP Pop
+
+//----------------------------------------------------------------------------//
+// Types                                                                      //
+//----------------------------------------------------------------------------//
+// Symbols in this lisp are just a standard C null terminated string
 typedef char* sym_t;
 
+// Simple reference counting setup, use REFCOUNT to use
 typedef struct
 {
     int _refCount;
 } ref_t;
 
-#define REFCOUNT ref_t _ref;
-
+// Different internal types
 typedef enum
 {
-    SYM,
-    LIST,
-    VAL,
-    BOOL,
-    NUM,
+    SYM, // string value
+    LIST,// list
+    VAL, // integer value
+    BOOL,// boolean value
+    NUM, // float value
     FUNL,// Lisp fn
     FUNC,// C fn
     QUOT,// '
 } cell_type;
 
+// base type for all cells - handles list traversal
+// and type lookup
 typedef struct _cell_base_t
 {
     REFCOUNT;
     struct _cell_base_t* next;
     cell_type t;
 } cell_base_t;
+
+// Basic list type, contains references to the head, and rest of the list
 typedef struct _list_t
 {
     cell_base_t _base;
     cell_base_t* car;
     cell_base_t* cdr;
-} list_t;
+} list_t, *ast_t;
 
+// Lisp function, params used for renaming parameters, body contains executablt
 typedef struct _fn_t
 {
     cell_base_t _base;
     list_t*      params;
     list_t*      body;
 } fn_t;
-    
+
+// C function pointer
 struct _env_t;
 typedef cell_base_t* (*func)(cell_base_t*, cell_base_t*, struct _env_t* env);
 
+// Basic cell type. Contains support for string, integer and C function types
 typedef struct _cell_t
 {
     cell_base_t _base;
     union { sym_t sym; int val; func func; };
 } cell_t;
 
-typedef list_t*     ast_t;
+// Environment/scope, a simple hashmap lookup, with ability to have children
 typedef struct _env_t
 {
     int*           keys;
@@ -61,19 +141,32 @@ typedef struct _env_t
     struct _env_t* _parent;
 } *env_t;
 
-void Free(cell_base_t* cell);
-#define FREE(v) Free((cell_base_t*)v)
+//----------------------------------------------------------------------------//
+// Static types                                                               //
+//----------------------------------------------------------------------------//
+cell_base_t* NIL;
 
-#define RETAIN(_val) { ((ref_t*)_val)->_refCount += 1; }
-#define RELEASE(_val) { if((((ref_t*)_val)->_refCount-= 1) <= 0) { FREE(_val); }}
+//----------------------------------------------------------------------------//
+// Utility functions                                                          //
+//----------------------------------------------------------------------------//
 
-cell_base_t* Get(env_t env, int hash);
-cell_base_t* Replace(env_t env, int hash, cell_base_t* val);
-#define _SET(XX,val) {sb_push(env->keys, XX); sb_push(env->vals, val); RETAIN(val);}
-#define SET(name,val) _SET(hash(name), val) 
-#define GET(name) Get(env, hash(name))
-#define REPLACE(name, val) Replace(env, hash(name), val);
+// DJB hash
+int hash(const char* str)
+{
+    int h = 5381;
+    while(*str)
+    {
+	h = ((h <<5) + h) + *str;
+	++str;
+    }
+    return h;
+}
 
+//----------------------------------------------------------------------------//
+// Code starts here!                                                          //
+//----------------------------------------------------------------------------//
+
+// Create a new cell
 cell_base_t* _cell(cell_type t, void* val)
 {
     cell_base_t* cell;
@@ -94,39 +187,27 @@ cell_base_t* _cell(cell_type t, void* val)
     RETAIN(cell);
     return cell;
 }
-#define CELL(t, v) _cell(t, (void*)v)
-#define LIST() (list_t*)CELL(LIST,0)
-#define FUNL() (fn_t*)CELL(FUNL,0)
-#define QUOTE() (list_t*)CELL(QUOT,0)
 
-int hash(const char* str)
+// Retrieve a hashed, named cell from the current scope
+cell_base_t* Get(env_t env, int hash)
 {
-    int h = 5381;
-    while(*str)
+    for(int i = 0; i < sb_count(env->keys); ++i)
     {
-	h = ((h <<5) + h) + *str;
-	++str;
+	if(env->keys[i] == hash)
+	{
+	    return env->vals[i];
+	}
     }
-    return h;
+    // If we got here, we didn't find it in the curren
+    // scope, so try going up one level
+    if( env->_parent )
+    {
+	return Get(env->_parent, hash);
+    }
+    return NULL;
 }
 
-cell_base_t* NIL;
-
-#define PUSH_BACK(list, val)						\
-    {									\
-	if( list->car == NULL ) { list->car = val; }			\
-	else if( list->cdr == NULL )					\
-	{								\
-	    list->cdr = val; list->car->next = val;			\
-	}								\
-	else								\
-	{								\
-	    cell_base_t* pCell = list->cdr;				\
-	    while( pCell->next != NULL ) pCell = pCell->next;		\
-	    pCell->next = val;						\
-	}								\
-    }
-
+// Pop a value off the list
 cell_base_t* Pop(list_t* list)
 {
     cell_base_t* c = list->car;
@@ -134,21 +215,21 @@ cell_base_t* Pop(list_t* list)
     list->cdr = list->car ? list->car->next : NULL;
     return c;
 }
-#define POP Pop
 
+// Parse an expression into a list, returns a pointer to the end
+// of the expression
 const char* ParseList(list_t* list, const char* expr)
 {
     const char* pTokStart = expr;
     const char* pTokEnd = expr + 1;
     while(1)
     {
-	if(*pTokStart == '\0')
-	{
-	    break;
-	}
-	
 	switch(*pTokStart)
 	{
+	    // early out - the end
+	case '\0':
+	    return pTokStart;
+	    // quote the following cell/list
 	case '\'':
 	{
 	    cell_base_t* cell = CELL(QUOT, 0);
@@ -156,6 +237,7 @@ const char* ParseList(list_t* list, const char* expr)
 	    pTokEnd = ParseList((list_t*)cell, pTokEnd);
 	}
 	break;
+	// start a new list
 	case '(':
 	{
 	    cell_base_t* cell = CELL(LIST, 0);
@@ -163,14 +245,17 @@ const char* ParseList(list_t* list, const char* expr)
 	    pTokEnd = ParseList((list_t*)cell, pTokEnd);
 	}
 	break;
+	// end the current list
 	case ')':
 	    return pTokEnd;
+	    // do nothing, unless the previous cell was quoted
 	case ' ':
 	    if(list->_base.t == QUOT)
 	    {
 		return pTokEnd; // if we're quoting, just break on the next space
 	    }
 	    break;
+	    // everything else, we convert to a symbol
 	default:
 	{
 	    while(*pTokEnd != '\0' && *pTokEnd !=  ' ' &&
@@ -186,13 +271,15 @@ const char* ParseList(list_t* list, const char* expr)
 	}
 	break;
 	}
-	
+
+	// next token
 	pTokStart = pTokEnd;
 	pTokEnd = pTokStart+1;
     }
     return pTokStart;
 }
 
+// Parse an expression into a syntax tree.
 ast_t Parse(const char* expr)
 {
     ast_t ast = LIST();
@@ -200,29 +287,34 @@ ast_t Parse(const char* expr)
     return ast;
 }
 
+// Evaluate a list and return the result
 cell_base_t* Eval(cell_base_t* car, cell_base_t* cdr, env_t env)
 {
+    // if the value is quoted, don't evaluate it
     if(car->t == QUOT)
     {
 	return ((list_t*)car)->car;
     }
-    
+
+    // evaluate until we have no lists left
     while(car->t == LIST)
     {
 	cell_base_t* res = Eval(((list_t*)car)->car, ((list_t*)car)->cdr, env);
-	//RELEASE(car);
 	car = res;
     }
-    
+
+    // If we find a symbol, look it up and replace with the relevant value
     if(car->t == SYM)
     {
 	cell_base_t* val = GET(((cell_t*)car)->sym);
 	if( val != NULL )
 	{
+	    // Call the C function directly
 	    if( val->t == FUNC )
 	    {
 		return ((cell_t*)val)->func(cdr, cdr->next, env);
 	    }
+	    // Evaluate a Lisp function
 	    else if( val->t == FUNL )
 	    {
 		env_t scope = malloc(8);
@@ -244,6 +336,7 @@ cell_base_t* Eval(cell_base_t* car, cell_base_t* cdr, env_t env)
     return car;
 }
 
+// Cleanup memory from an unused cell
 void Free(cell_base_t* cell)
 {
     switch(cell->t)
@@ -267,22 +360,7 @@ void Free(cell_base_t* cell)
     free(cell);
 }
 
-cell_base_t* Get(env_t env, int hash)
-{
-    for(int i = 0; i < sb_count(env->keys); ++i)
-    {
-	if(env->keys[i] == hash)
-	{
-	    return env->vals[i];
-	}
-    }
-    if( env->_parent )
-    {
-	return Get(env->_parent, hash);
-    }
-    return NULL;
-}
-
+// Replace a value in memory if the name already exists
 cell_base_t* Replace(env_t env, int hash, cell_base_t* val)
 {
     env_t scope = env;
@@ -299,10 +377,15 @@ cell_base_t* Replace(env_t env, int hash, cell_base_t* val)
 	}
 	scope = scope->_parent;
     }
+    // we couldn't find a matching name, so just set it
     _SET(hash, val);
     return val;
 }
 
+//----------------------------------------------------------------------------//
+// Lisp standard functions                                                    //
+//----------------------------------------------------------------------------//
+// Print list with newline
 cell_base_t* println(cell_base_t* car, cell_base_t* cdr, env_t env)
 {
     while( car )
@@ -315,6 +398,7 @@ cell_base_t* println(cell_base_t* car, cell_base_t* cdr, env_t env)
     return NIL;
 }
 
+// arithemetic summation of all parameters
 cell_base_t* plus(cell_base_t* car, cell_base_t* cdr, env_t env)
 {
     int val = 0;
@@ -335,6 +419,7 @@ cell_base_t* plus(cell_base_t* car, cell_base_t* cdr, env_t env)
     return CELL( VAL, val );
 }    
 
+// set named variable
 cell_base_t* set(cell_base_t* car, cell_base_t* cdr, env_t env)
 {
     cell_base_t* name = Eval(car, cdr, env);
@@ -347,6 +432,7 @@ cell_base_t* set(cell_base_t* car, cell_base_t* cdr, env_t env)
     return NIL;
 }
 
+// define a lisp function
 cell_base_t* lambda(cell_base_t* car, cell_base_t* cdr, env_t env)
 {
     {
@@ -361,6 +447,7 @@ cell_base_t* lambda(cell_base_t* car, cell_base_t* cdr, env_t env)
     return NIL;
 }
 
+// main entry point
 void lisp(void)
 {
     env_t env = malloc(8);
@@ -371,13 +458,12 @@ void lisp(void)
     
     NIL = CELL(VAL, 0 );
     ast_t ast = Parse(
-	"(set 'one 1) \
+	"(set 'testVar 0) \
          (set 'test lambda () \
-             (println (set 'one (+ one 1)))) \
+             (println (set 'testVar (+ testVar 1)))) \
          (test) \
          (test) \
          (test)");
-//    ast_t ast = Parse("(set 'one 1)(println (+ one 2))");
     cell_base_t* cell = ast->car;
     while( cell )
     {
