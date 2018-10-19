@@ -21,7 +21,7 @@ void printHelp(const char* name)
 
 void printContact(void)
 {
-    printf("");
+    printf(" ");
 }
 
 void lisp(void);

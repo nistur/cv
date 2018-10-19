@@ -1,12 +1,14 @@
 #!/bin/bash
 
+EFLAGS=
+
 output_to_file() {
     FILE=$1
     NAME=$(basename ${FILE} | sed -e 's/\./_/g')
 
-    echo -e "const char* ${NAME} = \\" >> ${OUT}
+    echo ${EFLAGS} "const char* ${NAME} = \\" >> ${OUT}
     cat ${FILE} | grep -v "^#+" | sed -e 's/\"/\\\"/g' -e 's/^/\t\"/' -e 's/$/\\n\"\t\\/g' >> ${OUT}
-    echo -e ";" >> ${OUT}
+    echo ${EFLAGS} ";" >> ${OUT}
     echo >> ${OUT}
     
 }
