@@ -52,11 +52,15 @@ $(OUT_DIR)/%.pdf: %.pdf
 	@rm $<
 
 src/cv.dat.h:
-	@sh ./embed.sh cv.org
+	@sh ./utils/embed.sh cv.org
 
-cv.out: src/cv.dat.h
+cv.out: src/cv.dat.h src/main.l.h
 	@echo "Building executable"
 	@gcc -o $@ src/*.c $(CFLAGS)
+
+src/main.l.h:
+	@echo "Processing lisp"
+	@python3 ./utils/embed_lisp.py src/main.l
 
 $(BIN_DIR)/cv: cv.out
 	@mv $< $(BIN_DIR)/cv

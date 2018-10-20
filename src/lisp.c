@@ -501,7 +501,7 @@ cell_base_t* lisp_if(cell_base_t* car, cell_base_t* cdr, env_t env)
 }
 
 // main entry point
-void lisp(void)
+void lisp(const char* expr)
 {
     env_t env = malloc(8);
     SET("println", CELL(FUNC, println));
@@ -519,17 +519,8 @@ void lisp(void)
     SET("t", T);
     SET("f", F);
     SET("nil", NIL);
-/*    ast_t ast = Parse(
-	"(set 'testVar 0) \
-         (set 'test lambda () \
-             (println (set 'testVar (+ testVar 1)))) \
-         (test) \
-         (test) \
-         (test)");*/
-    ast_t ast = Parse("\
-(set 'fib lambda(n) (if (< n 3) 1 (+ (fib (- n 1)) (fib (- n 2))))) \
-(println (fib 30))"
-	);
+    
+    ast_t ast = Parse(expr);
     cell_base_t* cell = ast->car;
     while( cell )
     {
