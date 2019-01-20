@@ -270,12 +270,24 @@ cell_base_t* setq(cell_base_t* car, cell_base_t* cdr, env_t env)
     return NIL;
 }
 
+cell_base_t* car( cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    return Eval(car, cdr, env);
+}
+
+cell_base_t* cdr( cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    return cdr;
+}
+
 void lisp(void)
 {
     env_t env = malloc(8);
     SET("println", CELL(FUNC, println));
     SET("+", CELL( FUNC, plus));
     SET("setq", CELL( FUNC, setq));
+    SET("car", CELL( FUNC, car));
+    SET("cdr", CELL( FUNC, cdr));
     
     NIL = CELL(VAL, 0 );
     ast_t ast = Parse("(setq one 1)(println (+ one 2))");
@@ -293,4 +305,5 @@ void lisp(void)
 	RELEASE(env->vals[i]);
     }
     sb_free(env->keys); sb_free(env->vals);
+    free(env);
 }
