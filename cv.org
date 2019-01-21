@@ -7,6 +7,15 @@
 
 #+INCLUDE: header.org
 
+# #########################################################################
+# This is a bit of a hack, so that for man-page export, it will add the
+# email address to the contact information, rather than "the details above"
+# which will be output for PDF
+# #########################################################################
+
+#+MACRO: CONTACT the details above.
+#+MAN_MACRO: CONTACT {_EMAIL_}
+
 * Personal Information
 I am a confident and competent programmer with a keen interest in making video games. I have had experience both
 developing and using many different platforms and environments. I have worked well in teams of various sizes with multiple disciplines.
@@ -139,5 +148,4 @@ I enjoy visiting new places, learning about different cultures and
 languages, and meeting new people.
 
 * 
-If there are any further questions, feel free to contact me on the
-details above.
+If there are any further questions, feel free to contact me on {{{CONTACT}}}
