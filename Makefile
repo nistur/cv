@@ -6,9 +6,11 @@ OBJ_DIR=out/tex/
 AUX_DIR=out/aux/
 #directory for executables
 BIN_DIR=out/bin/
+#directlry for man pages
+MAN_DIR=out/man/
 #use line below if want to compile all org files, CV just uses one which includes others
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
-FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv
+FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv ${MAN_DIR}/cv.6
 CFLAGS=-g
 SILENT=2>/dev/null > /dev/null
 
@@ -16,7 +18,7 @@ SILENT=2>/dev/null > /dev/null
 
 all: install-doc
 
-install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(FILES)
+install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(MAN_DIR) $(FILES)
 
 $(OBJ_DIR):
 	mkdir -v -p $(OBJ_DIR)
@@ -29,6 +31,8 @@ $(AUX_DIR):
 
 $(BIN_DIR):
 	mkdir -v -p $(BIN_DIR)
+$(MAN_DIR):
+	mkdir -v -p $(MAN_DIR)
 
 %.tex: %.org
 	@echo "Converting org-mode file $< to LaTeX"
@@ -47,6 +51,10 @@ $(BIN_DIR):
 	@rm -fr $(<:.tex=.log)
 	@rm -fr $(<:.tex=.out)
 
+%.6: %.org
+	@echo "Converting org-mode file $< to man-pages"
+	@lua scripts/org-to-man.lua $<
+
 $(OUT_DIR)/%.pdf: %.pdf
 	@install -m 644 -t $(OUT_DIR) $<
 	@rm $<
@@ -60,6 +68,9 @@ cv.out: src/cv.dat.h
 
 $(BIN_DIR)/cv: cv.out
 	@mv $< $(BIN_DIR)/cv
+
+$(MAN_DIR)/cv.6: cv.6
+	@mv $< $(MAN_DIR)/cv.6
 
 clean:
 	@echo "Cleaning output directories"

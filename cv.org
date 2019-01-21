@@ -13,78 +13,75 @@ developing and using many different platforms and environments. I have worked we
 I am a keen problem solver, enjoy investigating how things work and relish a challenge.
 
 * Experience
-** Senior Programmer, Hugo Games
-February 2018 until present
-
-Senior programmer working on getting multiple free to play mobile
-titles to market. Lead development team and architected systems to
-support creative workflows.
+** Senior Programmer, Hugo Games/5th Planet Games
+February 2018 until January 2019
 
 + Doodle Jump Space Chase (C#/Unity3D)
-+ Vikings (C#/Unity3D)
 
-Refactored existing codebases to bring them up to standard, and
-introduced new procedures to ensure the highest quality code possible.
+Acted as senior programmer on existing existing project, working to
+identify areas that could be improved in both game code, and editor
+tooling.
+
++ Vikings (C#/Unity3D) (Unreleased)
+
+Worked as technical lead on project, leading multiple programmers,
+both in house and external, establishing procedures, practices and
+workflows. Established architecture for online game and built tools
+and systems for team to use.
 
 ** Contract Programmer, Pixel Toys
 August 2017 until December 2017
 
-Contract programmer helping with porting existing project to tvOS.
-
 + Freeblade (C#/Unity3D)
 
-Also worked on architecting a system to migrate existing cloud save
-data on iOS to new format while maintaining high confidence that no
-data would be lost.
+Contract programmer helping with porting existing project to tvOS and
+architecting a system to migrate existing cloud save data on iOS to
+new format while maintaining high confidence that no data would be lost.
 
 ** Senior Programmer, Viewpoint Games
 June 2016 until October 2017
 
-Senior Programmer on several projects, and prototypes. Design,
-architect and implement game from conception to release, including AI,
-gameplay and optimisation for VR titles, both for mobile VR and for
-consoles.
-
 + Hungry Shark VR (C#/Unity3D)
 + Ghosts in the Toybox (C#/Unity3D)
 
-Led multidisciplinary development team through the lifetime of the project.
+Senior Programmer, leading a multidisciplinary team on several
+projects, and prototypes. Design, architect and implement game from
+conception to release, including AI, gameplay and optimisation for VR
+titles, both for mobile VR and for consoles.
  
 ** Programmer, FreeStyleGames
 May 2013 until May 2016
 
-Software engineer on several projects, providing user interface, gameplay and systems
-architecture.
-
 + Guitar Hero Live (C++)
 + Guitar Hero Live Companion App (C#/Unity3D)
 + Call of Duty: Online (Actionscript)
-+ Call of Duty: Ghosts Companion App (C#/Unity3D)
++ Call of Duty: Ghosts Companion App (C#/Unity3D) (Unreleased)
 
-Also worked on a small R&D team exploring different project ideas using a variety of
+Software engineer on several projects, providing user interface, gameplay and systems
+architecture. Also worked on a small R&D team exploring different project ideas using a variety of
 technologies, such as Virtual Reality, absolute positional controllers, and motion detecting
 cameras. 
+
 ** Programmer, AppToyz
 January 2013 until May 2013
 
 Lead software engineer on four iOS and Android
-projects. (C#/C++/Unity3D/Cocos2DX)
+projects. (C#/C++/Unity3D/Cocos2DX) (unreleased)
 
 ** Programmer, Ideaworks Game Studio
 May 2010 until January 2013
-
-Software engineer on major iOS titles, providing User Interface programming as well as
-gameplay, graphics and system architecture. Have worked closely with designers and artists
-to create usable workflows when creating the games.
 
 + Lara Croft and the Guardian of Light (C++) http://nistur.com/pg-cv01
 + Backbreaker 2: Vengeance (C++) http://nistur.com/pg-cv02
 + Transformers 3: Dark of the Moon (C++) http://nistur.com/pg-cv03
 + Call of Duty Black Ops: Zombies (C++) http://nistur.com/pg-cv04
 + Wipeout (C#/Unity3D) http://nistur.com/pg-cv05
+  
+Software engineer on major iOS titles, providing User Interface programming as well as
+gameplay, graphics and system architecture. Have worked closely with designers and artists
+to create usable workflows when creating the games.
 
 * Skills
-
 + Experience developing for a range of platforms including mobile, games consoles and desktop.
 + Experience developing VR titles for mobile, standalone, desktop and console platforms.
 + Confident using Windows, macOS, and Linux systems.
@@ -92,34 +89,21 @@ to create usable workflows when creating the games.
   Unity3D, Marmalade, Maratis3D, Instinct, Sauerbraten, Oops!
   Framework, XNA and Ogre.
 + Experience on commercial titles with various programming languages
-  such as:
-  + C/C++, Objective C, C#, Java, Lua, Python.
+  such as C/C++, Objective C, C#, Java, Lua, Python.
 + Experience using various programming languages for personal project:
-  + C/C++, Java, Lua, Python, Haskell, Lisp, Ruby, ASM.
+  C/C++, Java, Lua, Python, Haskell, Lisp, Ruby, ASM.
 * Education
 ** University of Abertay, Dundee
-2006 until 2010
-BSC (Hons) Computer Games Technology - Lower Second class Honours
+2006 until 2010 BSC (Hons) Computer Games Technology - Lower Second class Honours
 degree
-+ Fourth Year (Honours)
-  + Honours project topic: "Can information dissipate over time to
-    create a dynamic social environment to aid in game immersion?" http://tiara.nistur.com
-  + Also studied network programming, artificial intelligence and
-    advanced game techniques.
-+ Third Year
-  + Studied mathematics, graphics programming using DirectX, games
-    tool programming using Lex/Yacc, dynamic terrain generation, 3D
-    console development using PS2, sound programming for games using
-    DirectSound and a multidisciplinary group project.
-+ Second Year
-  + Studied mathematics, 2D console programming using PS2, 2D graphics
-    programming using Windows API, 3D graphics programming using
-    OpenGL and Japanese Language and Culture.
-+ First Year
-  + Studied mathematics, programming in C++, console development and
-    architecture using Game Boy Advance, 3D media production using
-    Milkshape 3D, Sound production using Soundforge and Cubase and
-    prototype game development using Adobe Flash.
++ Honours project topic: "Can information dissipate over time to
+  create a dynamic social environment to aid in game immersion?"
+  http://tiara.nistur.com Also studied network programming, artificial
+  intelligence and advanced game techniques.
++ Also studied mathematics throughout the course, graphics programming
+  using DirectX and OpenGL, fames tool programming using Lex/Yacc,
+  dynamic terrain generation, console game development, sound
+  programming and and took part in a multidisciplinary group project
 
 * Language Skills
 English: Native, German: Advanced, Dutch: Intermediate, French: Intermediate

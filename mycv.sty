@@ -7,28 +7,26 @@
 % which in turn is adapted from Jesse Luehrs resume at
 % https://github.com/doy/resume/blob/master/resume.tex
 
-% <<< packages
+% Packages
 \RequirePackage{latexsym,amsmath,amssymb,charter,color,calc,hyperref,titlesec}
 \RequirePackage[empty]{fullpage}
-% >>>
 
-% <<< dimensions/margins
+%% Page margins
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
-\addtolength{\oddsidemargin}{-0.25in}
-\addtolength{\evensidemargin}{-0.25in}
+\addtolength{\oddsidemargin}{-0.15in}
+\addtolength{\evensidemargin}{-0.15in}
 \addtolength{\textwidth}{0.5in}
-\addtolength{\topmargin}{-0.4in}
+\addtolength{\topmargin}{-0.6in}
 \addtolength{\textheight}{1in}
-% >>>
 
+%$ Don't want page numbering - gobble 'em up
 \pagenumbering{gobble}
 
-% <<< other definitions
+% Colours for the CV - a dark red, and a grey for URLs
 \definecolor{highlight-colour}{RGB}{128, 0, 0}
 \definecolor{url-gray}{gray}{0.25}
-% >>>
 
 %% Document header
 \newcommand{\resheader}[6]{
@@ -37,7 +35,7 @@
     #4 & \url{#2}           & #6\\
     \end{tabular*}
     \\
-    \vspace{0.1in}
+    \vspace{0.05in}
 }
 
 %% Enumerations
@@ -51,7 +49,7 @@
     \large \textcolor{highlight-colour}{
       \begin{minipage}
         {\textwidth-0.175in}
-        {\textbf{\newline#1 \vphantom{p\^{E}}}}
+        {\textbf{#1 \vphantom{p\^{E}}}}
       \end{minipage}
     }
   }
@@ -76,3 +74,4 @@
             [] %after-code
 \titlespacing{\subsubsection}{0pt}{0pt}{0pt}[{0pt}]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
