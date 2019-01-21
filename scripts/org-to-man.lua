@@ -4,10 +4,12 @@ local man_path = org_path:gsub(".org",".6")
 
 local man_file = io.open( man_path, "w+" )
 
-
-local function macro(_macro, _dat)
-   if _macro == "TITLE" then
-      man_file:write(".TH " .. _dat:gsub(" ", "_"):upper() .. " 6\n" )
+local function option(opt, dat)
+   if opt == "TITLE" then
+      man_file:write(".TH " .. dat:gsub(" ", "_"):upper() .. " 6\n" )
+   elseif opt == "INCLUDE" then
+      parse( dat )
+   else
    end
 end
 
@@ -32,27 +34,34 @@ local function itemise( item )
    end
 end
 
-for line in io.lines( org_path ) do
-   if line:find( " " ) == 1 then
-      line = line:gsub("^ +", "" )
-   else
-      man_file:write("\n")
-   end
-   if line:find( "%#%+" ) == 1 then
-      local separator = line:find("%: ")
-      local _macro = line:sub(3, separator-1)
-      local _dat = line:sub( separator+2 )
-      macro( _macro, _dat )
-   elseif line:find( "%* " ) == 1 then
-      heading( line:sub(3) )
-   elseif line:find( "%*%* " ) == 1 then
-      subheading( line:sub(4) )
-   elseif line:find( "%+ " ) == 1 then
-      itemise( line:sub(3) )
-   else
-      man_file:write(line .. " ")
+function parse( path )
+   for line in io.lines( path ) do
+      if line:find( "%#%+" ) == 1 then
+	 local separator = line:find("%: ")
+	 local opt = line:sub(3, separator-1)
+	 local dat = line:sub( separator+2 )
+	 option( opt, dat )
+      else
+	 
+	 if line:find( " " ) == 1 then
+	    line = line:gsub("^ +", "" )
+	 else
+	    man_file:write("\n")
+	 end
+      
+	 if line:find( "%* " ) == 1 then
+	    heading( line:sub(3) )
+	 elseif line:find( "%*%* " ) == 1 then
+	    subheading( line:sub(4) )
+	 elseif line:find( "%+ " ) == 1 then
+	    itemise( line:sub(3) )
+	 else
+	    man_file:write(line:gsub("{{{.-}}}", "") .. " ")
+	 end
+      end
    end
 end
 
+parse( org_path )
 man_file:close()
 
