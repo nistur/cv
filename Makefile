@@ -59,10 +59,10 @@ $(OUT_DIR)/%.pdf: %.pdf
 	@install -m 644 -t $(OUT_DIR) $<
 	@rm $<
 
-src/cv.dat.h:
+src/cv.org.h:
 	@sh ./embed.sh cv.org
 
-cv.out: src/cv.dat.h
+cv.out: src/cv.org.h
 	@echo "Building executable"
 	@gcc -o $@ src/*.c $(CFLAGS)
 
