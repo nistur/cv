@@ -59,12 +59,16 @@ $(OUT_DIR)/%.pdf: %.pdf
 	@install -m 644 -t $(OUT_DIR) $<
 	@rm $<
 
-src/cv.org.h:
-	@sh ./embed.sh cv.org
+src/cv.dat.h:
+	@sh ./utils/embed.sh cv.org
 
-cv.out: src/cv.org.h
+cv.out: src/cv.dat.h src/main.l.h
 	@echo "Building executable"
 	@gcc -o $@ src/*.c $(CFLAGS)
+
+src/main.l.h:
+	@echo "Processing lisp"
+	@python3 ./utils/embed_lisp.py src/main.l
 
 $(BIN_DIR)/cv: cv.out
 	@mv $< $(BIN_DIR)/cv

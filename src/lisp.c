@@ -38,8 +38,9 @@
 #define RETAIN(_val) { ((ref_t*)_val)->_refCount += 1; }
 // Decrease reference count - Free memory if no references left
 #define RELEASE(_val) { if((((ref_t*)_val)->_refCount-= 1) <= 0) { FREE(_val); }}
+#define __SET(XX,val,e) {sb_push(e->keys, XX); sb_push(e->vals, val); RETAIN(val);}
 // Set a value to a given name-hash (prefer SET)
-#define _SET(XX,val) {sb_push(env->keys, XX); sb_push(env->vals, val); RETAIN(val);}
+#define _SET(XX,val)  __SET(XX,val,env)
 // Set a value to a given name
 #define SET(name,val) _SET(hash(name), val) 
 // Get a named value
@@ -145,6 +146,8 @@ typedef struct _env_t
 // Static types                                                               //
 //----------------------------------------------------------------------------//
 cell_base_t* NIL;
+cell_base_t* T;
+cell_base_t* F;
 
 //----------------------------------------------------------------------------//
 // Utility functions                                                          //
@@ -318,11 +321,13 @@ cell_base_t* Eval(cell_base_t* car, cell_base_t* cdr, env_t env)
 	    else if( val->t == FUNL )
 	    {
 		env_t scope = malloc(8);
+		memset(scope, 0, 8);
 		scope->_parent = env;
 		cell_base_t* name = ((fn_t*)val)->params->car;
-		cell_base_t* var = cdr ? ((list_t*)cdr)->car : NIL;
-		while(name && val)
+		cell_base_t* var = cdr ? cdr : NIL;
+		while(name && var)
 		{
+		    __SET(hash(((cell_t*)name)->sym), Eval(var, var->next, env), scope);
 		    name = name->next;
 		    var = var->next;
 		}
@@ -417,7 +422,34 @@ cell_base_t* plus(cell_base_t* car, cell_base_t* cdr, env_t env)
 	cell = cell->next;
     }
     return CELL( VAL, val );
-}    
+}
+
+cell_base_t* sub(cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    int val = 0;
+    int first = 1;
+    cell_base_t* cell = car;
+    while( cell )
+    {
+	cell_base_t* res = Eval(cell, cell->next, env);
+	if(res->t == SYM)
+	{
+	    val-= atoi(((cell_t*)res)->sym);
+	}
+	else if( res->t == VAL)
+	{
+	    val -= ((cell_t*)res)->val;
+	}
+
+	if( first )
+	{
+	    first = 0;
+	    val = -val;
+	}
+	cell = cell->next;
+    }
+    return CELL( VAL, val );
+}
 
 // set named variable
 cell_base_t* set(cell_base_t* car, cell_base_t* cdr, env_t env)
@@ -432,6 +464,15 @@ cell_base_t* set(cell_base_t* car, cell_base_t* cdr, env_t env)
     return NIL;
 }
 
+cell_base_t* car( cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    return Eval(car, cdr, env);
+}
+
+cell_base_t* cdr( cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    return cdr;
+}
 // define a lisp function
 cell_base_t* lambda(cell_base_t* car, cell_base_t* cdr, env_t env)
 {
@@ -447,23 +488,50 @@ cell_base_t* lambda(cell_base_t* car, cell_base_t* cdr, env_t env)
     return NIL;
 }
 
+cell_base_t* less(cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    cell_base_t* val1 = Eval(car, cdr, env);
+    cell_base_t* val2 = Eval(cdr, cdr->next, env);
+
+    int v1 = val1->t == SYM ? atoi(((cell_t*)val1)->sym) : ((cell_t*)val1)->val;
+    int v2 = val2->t == SYM ? atoi(((cell_t*)val2)->sym) : ((cell_t*)val2)->val;
+    
+    return v1 < v2 ? T : F;
+}
+
+cell_base_t* lisp_if(cell_base_t* car, cell_base_t* cdr, env_t env)
+{
+    cell_base_t* test = Eval(car, cdr, env);
+    if( test && test != NIL && test != F && ((cell_t*)test)->val != 0)
+    {
+	return Eval(cdr, cdr->next, env);
+    }
+    return Eval( cdr->next, cdr->next->next, env);
+}
+
 // main entry point
-void lisp(void)
+void lisp(const char* expr)
 {
     env_t env = malloc(8);
     SET("println", CELL(FUNC, println));
     SET("+", CELL( FUNC, plus));
+    SET("car", CELL( FUNC, car));
+    SET("cdr", CELL( FUNC, cdr));
+    SET("-", CELL( FUNC, sub));
+    SET("<", CELL( FUNC, less));
+    SET("if", CELL( FUNC, lisp_if));
     SET("set", CELL( FUNC, set));
     SET("lambda", CELL( FUNC, lambda));
-    
+
     NIL = CELL(VAL, 0 );
-    ast_t ast = Parse(
-	"(set 'testVar 0) \
-         (set 'test lambda () \
-             (println (set 'testVar (+ testVar 1)))) \
-         (test) \
-         (test) \
-         (test)");
+    T = CELL(VAL,1);
+    F = NIL;
+
+    SET("t", T);
+    SET("f", F);
+    SET("nil", NIL);
+    
+    ast_t ast = Parse(expr);
     cell_base_t* cell = ast->car;
     while( cell )
     {
@@ -478,4 +546,5 @@ void lisp(void)
 	RELEASE(env->vals[i]);
     }
     sb_free(env->keys); sb_free(env->vals);
+    free(env);
 }
