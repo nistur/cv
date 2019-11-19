@@ -19,7 +19,6 @@ solver, enjoy investigating how things work and relish a
 challenge.
 
 * Experience
-<<<<<<< HEAD
 ** Lead Programmer, Funsolve
 February 2019 until present
 

@@ -53,7 +53,7 @@ $(MAN_DIR):
 
 %.6: %.org
 	@echo "Converting org-mode file $< to man-pages"
-	@lua scripts/org-to-man.lua $<
+	@lua utils/org-to-man.lua $<
 
 $(OUT_DIR)/%.pdf: %.pdf
 	@install -m 644 -t $(OUT_DIR) $<
