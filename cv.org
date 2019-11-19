@@ -3,25 +3,39 @@
 #+STARTUP: hidestars indent
 #+LaTeX_HEADER: \usepackage{mycv}
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, urlcolor={url-gray}}
-#+LaTeX_CLASS_OPTIONS: [a4paper,9pt]
+#+LaTeX_CLASS_OPTIONS: [a4paper,8pt]
 
 #+INCLUDE: header.org
-
-# #########################################################################
-# This is a bit of a hack, so that for man-page export, it will add the
-# email address to the contact information, rather than "the details above"
-# which will be output for PDF
-# #########################################################################
 
 #+MACRO: CONTACT the details above.
 #+MAN_MACRO: CONTACT {_EMAIL_}
 
 * Personal Information
-I am a confident and competent programmer with a keen interest in making video games. I have had experience both
-developing and using many different platforms and environments. I have worked well in teams of various sizes with multiple disciplines.
-I am a keen problem solver, enjoy investigating how things work and relish a challenge.
+I am a confident and competent programmer with a keen interest in
+making video games. I have had experience both developing and using
+many different platforms and environments. I have worked well in teams
+of various sizes with multiple disciplines.  I am a keen problem
+solver, enjoy investigating how things work and relish a
+challenge.
 
 * Experience
+** Lead Programmer, Funsolve
+February 2019 until present
+
++ Jumanji (C++, Blueprints/Unreal)
+
+Took over ownership of existing project and lead team to create a
+multiplayer cooperative adventure game, shipping on four
+platforms. Scheduled code resources, and helped scope the project to
+meet deadlines
+
++ HotWheels Ultimate Garage (C#/Unity3D) (Unreleased)
+
+Worked with client to help develop a toys-to-life style experience for
+young kids. Worked closely with design to flesh out the code design,
+while prototyping features and creating a basis for the production
+code.
+
 ** Senior Programmer, Hugo Games/5th Planet Games
 February 2018 until January 2019
 
@@ -66,10 +80,11 @@ May 2013 until May 2016
 + Call of Duty: Online (Actionscript)
 + Call of Duty: Ghosts Companion App (C#/Unity3D) (Unreleased)
 
-Software engineer on several projects, providing user interface, gameplay and systems
-architecture. Also worked on a small R&D team exploring different project ideas using a variety of
-technologies, such as Virtual Reality, absolute positional controllers, and motion detecting
-cameras. 
+Software engineer on several projects, providing user interface,
+gameplay and systems architecture. Also worked on a small R&D team
+exploring different project ideas using a variety of technologies,
+such as Virtual Reality, absolute positional controllers, and motion
+detecting cameras.
 
 ** Programmer, AppToyz
 January 2013 until May 2013
@@ -86,9 +101,10 @@ May 2010 until January 2013
 + Call of Duty Black Ops: Zombies (C++) http://nistur.com/pg-cv04
 + Wipeout (C#/Unity3D) http://nistur.com/pg-cv05
   
-Software engineer on major iOS titles, providing User Interface programming as well as
-gameplay, graphics and system architecture. Have worked closely with designers and artists
-to create usable workflows when creating the games.
+Software engineer on major iOS titles, providing User Interface
+programming as well as gameplay, graphics and system
+architecture. Have worked closely with designers and artists to create
+usable workflows when creating the games.
 
 * Skills
 + Experience developing for a range of platforms including mobile, games consoles and desktop.
@@ -99,7 +115,7 @@ to create usable workflows when creating the games.
   Framework, XNA and Ogre.
 + Experience on commercial titles with various programming languages
   such as C/C++, Objective C, C#, Java, Lua, Python.
-+ Experience using various programming languages for personal project:
++ Experience using various programming languages for personal projects:
   C/C++, Java, Lua, Python, Haskell, Lisp, Ruby, ASM.
 * Education
 ** University of Abertay, Dundee
@@ -115,7 +131,7 @@ degree
   programming and and took part in a multidisciplinary group project
 
 * Language Skills
-English: Native, German: Advanced, Dutch: Intermediate, French: Intermediate
+English: Native, German: Advanced, Dutch: Intermediate
 
 * Hobbies and Interests
 
