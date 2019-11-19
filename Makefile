@@ -12,6 +12,7 @@ MAN_DIR=out/man/
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
 FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv ${MAN_DIR}/cv.6
 CFLAGS=-g
+SILENT=2>/dev/null > /dev/null
 
 .PHONY: all clean install-doc
 
@@ -35,11 +36,11 @@ $(MAN_DIR):
 
 %.tex: %.org
 	@echo "Converting org-mode file $< to LaTeX"
-	@emacs $< --batch -f org-latex-export-to-latex --kill
+	@emacs $< --batch -f org-latex-export-to-latex --kill $(SILENT)
 
 %.pdf: %.tex
 	@echo "Converting LaTeX file $< to PDF"
-	@pdflatex $< > /dev/null
+	@pdflatex $< $(SILENT)
 	@echo "Tidying output..."
 	@install -m 644 -t $(OBJ_DIR) $<
 	@install -m 644 -t $(AUX_DIR) $(<:.tex=.aux)
@@ -59,11 +60,15 @@ $(OUT_DIR)/%.pdf: %.pdf
 	@rm $<
 
 src/cv.dat.h:
-	@sh ./embed.sh cv.org
+	@sh ./utils/embed.sh cv.org
 
-cv.out: src/cv.dat.h
+cv.out: src/cv.dat.h src/main.l.h
 	@echo "Building executable"
 	@gcc -o $@ src/*.c $(CFLAGS)
+
+src/main.l.h:
+	@echo "Processing lisp"
+	@python3 ./utils/embed_lisp.py src/main.l
 
 $(BIN_DIR)/cv: cv.out
 	@mv $< $(BIN_DIR)/cv

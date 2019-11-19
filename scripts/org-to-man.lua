@@ -152,7 +152,7 @@ path: The path of the file to parse
 ]]--
 function parse( path )
    for line in io.lines( path ) do
-      if line:find( "# " ) == 1 the
+      if line:find( "# " ) == 1 then
       -- ignore commentsn
       else
 	 -- replace all macros required
