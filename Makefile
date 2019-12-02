@@ -12,7 +12,7 @@ MAN_DIR=out/man/
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
 FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv ${MAN_DIR}/cv.6
 CFLAGS=-g
-SILENT=2>/dev/null > /dev/null
+#SILENT=2>/dev/null > /dev/null
 
 .PHONY: all clean install-doc
 

@@ -5,7 +5,7 @@
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, urlcolor={url-gray}}
 #+LaTeX_CLASS_OPTIONS: [a4paper,8pt]
 
-#+INCLUDE: header.org
+#+INCLUDE: include/header.org
 
 #+MACRO: CONTACT the details above.
 #+MAN_MACRO: CONTACT {_EMAIL_}
@@ -107,16 +107,13 @@ architecture. Have worked closely with designers and artists to create
 usable workflows when creating the games.
 
 * Skills
-+ Experience developing for a range of platforms including mobile, games consoles and desktop.
-+ Experience developing VR titles for mobile, standalone, desktop and console platforms.
++ Experience developing for mobile, console and desktop and with VR/AR
 + Confident using Windows, macOS, and Linux systems.
 + Experience using a variety of game engines and frameworks such as
-  Unity3D, Marmalade, Maratis3D, Instinct, Sauerbraten, Oops!
+  Unity3D, Unreal 4, Marmalade, Maratis3D, Instinct, Sauerbraten, Oops!
   Framework, XNA and Ogre.
-+ Experience on commercial titles with various programming languages
-  such as C/C++, Objective C, C#, Java, Lua, Python.
-+ Experience using various programming languages for personal projects:
-  C/C++, Java, Lua, Python, Haskell, Lisp, Ruby, ASM.
++ Comfortable with a wide range of progreamming languaes including
+  C/C++, Objective C, C#, Java, Lua, Python, Lisp, ASM.
 * Education
 ** University of Abertay, Dundee
 2006 until 2010 BSC (Hons) Computer Games Technology - Lower Second class Honours
@@ -129,9 +126,6 @@ degree
   using DirectX and OpenGL, fames tool programming using Lex/Yacc,
   dynamic terrain generation, console game development, sound
   programming and and took part in a multidisciplinary group project
-
-* Language Skills
-English: Native, German: Advanced, Dutch: Intermediate
 
 * Hobbies and Interests
 
@@ -154,14 +148,6 @@ released when I was younger (and before!) to modern games. Some of my
 favourites are Role Play Games such as the Final Fantasy, and The
 Elder Scrolls series' and Space Simulations such as the X series, and
 Freespace.
-
-** Reading
-As well as programming related books, I enjoy reading fiction, usually
-either science fiction or fantasy.
-
-** Travel
-I enjoy visiting new places, learning about different cultures and
-languages, and meeting new people.
 
 * 
 If there are any further questions, feel free to contact me on {{{CONTACT}}}
