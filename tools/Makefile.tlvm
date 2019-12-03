@@ -1,0 +1,44 @@
+#output directory for the executable
+OUT_DIR=bin/
+
+#object files for various bits. I would like to be able to just give the object names
+#and have it add the folders etc, but I haven't done this yet.
+CORE_OBJS=obj/coretlvm.o obj/coretime.o obj/corestatus.o obj/coredebug.o
+8080_OBJS=obj/80808080.o \
+	obj/80808080_16.o \
+	obj/80808080_ADD.o \
+	obj/80808080_CMP.o \
+	obj/80808080_debug.o \
+	obj/80808080_IO.o \
+	obj/80808080_JMP.o \
+	obj/80808080_MOV.o \
+	obj/80808080_ROT.o \
+	obj/80808080_RST.o \
+	obj/80808080_stack.o \
+	obj/80808080_SUB.o
+EXE_OBJS=obj/exedbg.o
+
+#include directories
+INC_DIRS=-Itlvm/include -Itlvm/src/include
+
+#compile flags
+CFLAGS=$(INC_DIRS) -DTLVM_HAS_8080 -DTLVM_DEBUG
+CXXFLAGS=$(INC_DIRS) -DTLVM_HAS_8080 -DTLVM_DEBUG
+
+#link flags
+LDFLAGS=-lpthread
+.PHONY: all
+
+all: bin/tlvm
+
+bin/tlvm: $(CORE_OBJS) $(8080_OBJS) $(EXE_OBJS)
+	g++ -o $@ $(CORE_OBJS) $(8080_OBJS) $(EXE_OBJS) $(LDFLAGS)
+
+obj/core%.o: tlvm/src/%.c
+	gcc -o $@ $< -c $(CFLAGS)
+
+obj/8080%.o: tlvm/src/8080/%.c
+	gcc -o $@ $< -c $(CFLAGS)
+
+obj/exe%.o: tlvm/dbg/%.cpp
+	g++ -o $@ $< -c $(CXXFLAGS)

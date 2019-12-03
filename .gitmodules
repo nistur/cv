@@ -1,0 +1,6 @@
+[submodule "tools/asm8080"]
+	path = tools/asm8080
+	url = https://github.com/begoon/asm8080
+[submodule "tools/tlvm"]
+	path = tools/tlvm
+	url = https://github.com/nistur/tlvm

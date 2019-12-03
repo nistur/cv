@@ -8,17 +8,27 @@ AUX_DIR=out/aux/
 BIN_DIR=out/bin/
 #directlry for man pages
 MAN_DIR=out/man/
+#tools we will user
+TOOLS_DIR=tools/
 #use line below if want to compile all org files, CV just uses one which includes others
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
 FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv ${MAN_DIR}/cv.6
 CFLAGS=-g
-#SILENT=2>/dev/null > /dev/null
+SILENT=2>/dev/null > /dev/null
 
-.PHONY: all clean install-doc
+.PHONY: all clean install-doc tools
 
-all: install-doc
+all: install-doc tools
 
 install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(MAN_DIR) $(FILES)
+
+tools: $(TOOLS_DIR)bin $(TOOLS_DIR)bin/tlvm #$(TOOLS_DIR)asm8080
+
+$(TOOLS_DIR)bin/tlvm:
+	make -C tools -f Makefile.tlvm
+
+$(TOOLS_DIR)bin:
+	mkdir -v -p $(TOOLS_DIR)bin
 
 $(OBJ_DIR):
 	mkdir -v -p $(OBJ_DIR)
@@ -78,7 +88,9 @@ $(MAN_DIR)/cv.6: cv.6
 
 clean:
 	@echo "Cleaning output directories"
-	@rm -fr $(OUT_DIR)/*.pdf
-	@rm -fr $(AUX_DIR)/*
-	@rm -fr $(OBJ_DIR)/*.tex
-	@rm -fr $(BIN_DIR)/*
+	@rm -fr $(OUT_DIR)
+	@rm -fr $(AUX_DIR)
+	@rm -fr $(OBJ_DIR)
+	@rm -fr $(BIN_DIR)
+	@rm -fr $(MAN_DIR)
+	@rm -fr $(TOOLS_DIRR)bin
