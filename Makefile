@@ -22,27 +22,33 @@ all: install-doc tools
 
 install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(MAN_DIR) $(FILES)
 
-tools: $(TOOLS_DIR)bin $(TOOLS_DIR)bin/tlvm #$(TOOLS_DIR)asm8080
+tools: $(TOOLS_DIR)bin $(TOOLS_DIR)bin/tlvm $(TOOLS_DIR)bin/asm8080
+
+$(TOOLS_DIR)bin/asm8080:
+	@echo "Preparing assembler"
+	@make -C tools -f Makefile.asm8080 $(SILENT)
 
 $(TOOLS_DIR)bin/tlvm:
-	make -C tools -f Makefile.tlvm
+	@echo "Building 8 bit system"
+	@make -C tools -f Makefile.tlvm $(SILENT)
 
 $(TOOLS_DIR)bin:
-	mkdir -v -p $(TOOLS_DIR)bin
+	@mkdir -v -p $(TOOLS_DIR)bin
 
 $(OBJ_DIR):
-	mkdir -v -p $(OBJ_DIR)
+	@mkdir -v -p $(OBJ_DIR)
 
 $(OUT_DIR):
-	mkdir -v -p $(OUT_DIR)
+	@mkdir -v -p $(OUT_DIR)
 
 $(AUX_DIR):
-	mkdir -v -p $(AUX_DIR)
+	@mkdir -v -p $(AUX_DIR)
 
 $(BIN_DIR):
-	mkdir -v -p $(BIN_DIR)
+	@mkdir -v -p $(BIN_DIR)
+
 $(MAN_DIR):
-	mkdir -v -p $(MAN_DIR)
+	@mkdir -v -p $(MAN_DIR)
 
 %.tex: %.org
 	@echo "Converting org-mode file $< to LaTeX"

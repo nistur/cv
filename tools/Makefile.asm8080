@@ -1,0 +1,24 @@
+OUT_DIR=bin/
+
+OBJS=obj/asm_dir.o \
+	obj/exp_parser.o \
+	obj/msg.o \
+	obj/opcode.o \
+	obj/util.o \
+	obj/main.o
+
+INC_DIRS=-Iasm8080/src
+
+CFLAGS=$(INC_DIRS) -D_TGT_OS_LINUX32
+LDFLAGS=
+
+.PHONY: all
+
+all: bin/asm8080
+
+bin/asm8080: $(OBJS)
+	g++ -o $@ $(OBJS) $(LDFLAGS)
+
+obj/%.o: asm8080/src/%.c
+	gcc -o $@ $< -c $(CFLAGS)
+
