@@ -1,0 +1,7 @@
+silent
+file out/bin/1page.bin 0
+memory 0x200 64000
+i 1 0 2
+run
+quit
+

@@ -6,23 +6,33 @@ OBJ_DIR=out/tex/
 AUX_DIR=out/aux/
 #directory for executables
 BIN_DIR=out/bin/
-#directlry for man pages
+#directory for man pages
 MAN_DIR=out/man/
+#images go here
+IMG_DIR=out/png/
 #tools we will user
 TOOLS_DIR=tools/
+SRC_DIR=src/
 #use line below if want to compile all org files, CV just uses one which includes others
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
-FILES=$(OUT_DIR)/cv.pdf ${BIN_DIR}/cv ${MAN_DIR}/cv.6
+FILES=$(OUT_DIR)/cv.pdf $(BIN_DIR)/cv $(MAN_DIR)/cv.6 $(IMG_DIR)/1page.png
+OVERVIEW=1page.bin
 CFLAGS=-g
 SILENT=2>/dev/null > /dev/null
 
-.PHONY: all clean install-doc tools
+.PHONY: all clean install-doc tools dirs
 
 all: install-doc tools
 
-install-doc: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(MAN_DIR) $(FILES)
+install-doc: dirs $(FILES) $(BIN_DIR)$(OVERVIEW)
+
+dirs: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(IMG_DIR) $(MAN_DIR)
 
 tools: $(TOOLS_DIR)bin $(TOOLS_DIR)bin/tlvm $(TOOLS_DIR)bin/asm8080
+
+$(BIN_DIR)%.bin: $(SRC_DIR)%.s tools
+	@echo "Creating overview generator"
+	@$(TOOLS_DIR)bin/asm8080 -Isrc -o$(@:.bin=) $<
 
 $(TOOLS_DIR)bin/asm8080:
 	@echo "Preparing assembler"
@@ -46,6 +56,9 @@ $(AUX_DIR):
 
 $(BIN_DIR):
 	@mkdir -v -p $(BIN_DIR)
+
+$(IMG_DIR):
+	@mkdir -v -p $(IMG_DIR)
 
 $(MAN_DIR):
 	@mkdir -v -p $(MAN_DIR)
@@ -92,6 +105,9 @@ $(BIN_DIR)/cv: cv.out
 $(MAN_DIR)/cv.6: cv.6
 	@mv $< $(MAN_DIR)/cv.6
 
+$(IMG_DIR)/%.png : $(BIN_DIR)/$(OVERVIEW)
+	$(TOOLS_DIR)/bin/tlvm | pnm2png > $@
+
 clean:
 	@echo "Cleaning output directories"
 	@rm -fr $(OUT_DIR)
@@ -99,4 +115,4 @@ clean:
 	@rm -fr $(OBJ_DIR)
 	@rm -fr $(BIN_DIR)
 	@rm -fr $(MAN_DIR)
-	@rm -fr $(TOOLS_DIRR)bin
+	@rm -fr $(TOOLS_DIR)/bin
