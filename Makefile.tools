@@ -8,7 +8,11 @@ all: dirs
 
 dirs:
 	@mkdir -v -p $(TOOLS_DIR)/bin
+	@mkdir -v -p $(TOOLS_DIR)/obj
 
 clean:
 	@make -C $(TOOLS_DIR) -f Makefile.asm8080 clean
 	@make -C $(TOOLS_DIR) -f Makefile.tlvm clean
+	rm -rf $(TOOLS_DIR)/bin
+	rm -rf $(TOOLS_DIR)/obj
+

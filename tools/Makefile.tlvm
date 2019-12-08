@@ -1,22 +1,25 @@
 #output directory for the executable
 OUT_DIR=bin/
+OBJ_DIR=obj/
+
+OUTPUT=$(OUT_DIR)/tlvm
 
 #object files for various bits. I would like to be able to just give the object names
 #and have it add the folders etc, but I haven't done this yet.
-CORE_OBJS=obj/coretlvm.o obj/coretime.o obj/corestatus.o obj/coredebug.o
-8080_OBJS=obj/80808080.o \
-	obj/80808080_16.o \
-	obj/80808080_ADD.o \
-	obj/80808080_CMP.o \
-	obj/80808080_debug.o \
-	obj/80808080_IO.o \
-	obj/80808080_JMP.o \
-	obj/80808080_MOV.o \
-	obj/80808080_ROT.o \
-	obj/80808080_RST.o \
-	obj/80808080_stack.o \
-	obj/80808080_SUB.o
-EXE_OBJS=obj/exedbg.o
+CORE_OBJS=$(OBJ_DIR)/coretlvm.o $(OBJ_DIR)/coretime.o $(OBJ_DIR)/corestatus.o $(OBJ_DIR)/coredebug.o
+8080_OBJS=$(OBJ_DIR)/80808080.o \
+	$(OBJ_DIR)/80808080_16.o \
+	$(OBJ_DIR)/80808080_ADD.o \
+	$(OBJ_DIR)/80808080_CMP.o \
+	$(OBJ_DIR)/80808080_debug.o \
+	$(OBJ_DIR)/80808080_IO.o \
+	$(OBJ_DIR)/80808080_JMP.o \
+	$(OBJ_DIR)/80808080_MOV.o \
+	$(OBJ_DIR)/80808080_ROT.o \
+	$(OBJ_DIR)/80808080_RST.o \
+	$(OBJ_DIR)/80808080_stack.o \
+	$(OBJ_DIR)/80808080_SUB.o
+EXE_OBJS=$(OBJ_DIR)/exedbg.o
 
 #include directories
 INC_DIRS=-Itlvm/include -Itlvm/src/include
@@ -27,18 +30,28 @@ CXXFLAGS=$(INC_DIRS) -DTLVM_HAS_8080 -DTLVM_DEBUG
 
 #link flags
 LDFLAGS=-lpthread
-.PHONY: all
+.PHONY: all dir clean
 
-all: bin/tlvm
+all: $(OUTPUT)
 
-bin/tlvm: $(CORE_OBJS) $(8080_OBJS) $(EXE_OBJS)
+$(OUTPUT): $(CORE_OBJS) $(8080_OBJS) $(EXE_OBJS)
 	g++ -o $@ $(CORE_OBJS) $(8080_OBJS) $(EXE_OBJS) $(LDFLAGS)
 
-obj/core%.o: tlvm/src/%.c
+$(OBJ_DIR)/core%.o: tlvm/src/%.c
 	gcc -o $@ $< -c $(CFLAGS)
 
-obj/8080%.o: tlvm/src/8080/%.c
+$(OBJ_DIR)/8080%.o: tlvm/src/8080/%.c
 	gcc -o $@ $< -c $(CFLAGS)
 
-obj/exe%.o: tlvm/dbg/%.cpp
+$(OBJ_DIR)/exe%.o: tlvm/dbg/%.cpp
 	g++ -o $@ $< -c $(CXXFLAGS)
+
+dir:
+	mkdir -v -p #(OUT_DIR)
+	mkdir -v -p $(OBJ_DIR)
+
+clean:
+	rm -f $(OUTPUT)
+	rm -f $(CORE_OBJS)
+	rm -f $(8080_OBJS)
+	rm -f $(EXE_OBJS)

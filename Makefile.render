@@ -9,5 +9,10 @@ FILES=src/render/main.m	  	\
 
 OUTPUT=out/bin/render
 
+.PHONY: clean
+
 $(OUTPUT):
 	gcc -o $(OUTPUT) $(FILES) $(OBJCFLAGS)
+
+clean:
+	@rm -rf $(OUTPUT)

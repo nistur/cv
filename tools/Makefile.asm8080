@@ -1,5 +1,7 @@
 OUT_DIR=bin/
 
+OUTPUT=$(OUT_DIR)/asm8080
+
 OBJS=obj/asm_dir.o \
 	obj/exp_parser.o \
 	obj/msg.o \
@@ -12,13 +14,16 @@ INC_DIRS=-Iasm8080/src
 CFLAGS=$(INC_DIRS) -D_TGT_OS_LINUX32
 LDFLAGS=
 
-.PHONY: all
+.PHONY: all clean
 
-all: bin/asm8080
+all: $(OUTPUT)
 
-bin/asm8080: $(OBJS)
+$(OUTPUT): $(OBJS)
 	g++ -o $@ $(OBJS) $(LDFLAGS)
 
 obj/%.o: asm8080/src/%.c
 	gcc -o $@ $< -c $(CFLAGS)
 
+clean:
+	@rm -f $(OUTPUT)
+	@rm -f $(OBJS) 
