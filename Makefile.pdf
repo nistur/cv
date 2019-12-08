@@ -1,0 +1,29 @@
+OUT_DIR=out/pdf
+OBJ_DIR=out/obj
+
+OUTPUT=philippgeyer.pdf
+
+OBJS=$(OBJ_DIR)/cv.tex
+
+TEXFLAGS=-halt-on-error -output-directory=$(OBJ_DIR)
+
+.PHONY: all dir clean
+
+all: dir $(OBJS)
+	pdflatex $(TEXFLAGS) $(OBJS)
+	mv $(OBJ_DIR)/cv.pdf $(OUT_DIR)/$(OUTPUT)
+
+$(OBJ_DIR)/%.tex: %.org
+	emacs $< --batch -f org-latex-export-to-latex --kill
+	mv $(<:.org=.tex) $@
+
+dir:
+	@mkdir -v -p $(OUT_DIR)
+	@mkdir -v -p $(OBJ_DIR)
+
+clean:
+	@rm -f $(OUT_DIR)/$(OUTPUT)
+	@rm -f $(OBJ_DIR)/*.tex
+	@rm -f $(OBJ_DIR)/*.aux
+	@rm -f $(OBJ_DIR)/*.log
+	@rm -f $(OBJ_DIR)/*.out

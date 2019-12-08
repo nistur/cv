@@ -15,98 +15,34 @@ TOOLS_DIR=tools/
 SRC_DIR=src/
 #use line below if want to compile all org files, CV just uses one which includes others
 #FILES=$(patsubst %.org,$(OUT_DIR)/%.pdf,$(wildcard *.org))
-FILES=$(OUT_DIR)/cv.pdf $(BIN_DIR)/cv $(MAN_DIR)/cv.6 $(IMG_DIR)/1page.png
-OVERVIEW=1page.bin
 CFLAGS=-g
 SILENT=2>/dev/null > /dev/null
 
-.PHONY: all clean install-doc tools dirs
+PROJS=exe render tools man pdf
 
-all: install-doc tools
+.PHONY: all clean $(PROJS)
 
-install-doc: dirs $(FILES) $(BIN_DIR)$(OVERVIEW)
+all: $(PROJS)
 
-dirs: $(OUT_DIR) $(OBJ_DIR) $(AUX_DIR) $(BIN_DIR) $(IMG_DIR) $(MAN_DIR)
+exe:
+	@echo "Making executable"
+	@make -f Makefile.$@  $(SILENT)
 
-tools: $(TOOLS_DIR)bin $(TOOLS_DIR)bin/tlvm $(TOOLS_DIR)bin/asm8080
+render:
+	@echo "Objectifying renderer"
+	@make -f Makefile.$@ $(SILENT)
 
-$(BIN_DIR)%.bin: $(SRC_DIR)%.s tools
-	@echo "Creating overview generator"
-	@$(TOOLS_DIR)bin/asm8080 -Isrc -o$(@:.bin=) $<
+tools:
+	@echo "Finding some tools"
+	@make -f Makefile.$@ $(SILENT)
 
-$(TOOLS_DIR)bin/asm8080:
-	@echo "Preparing assembler"
-	@make -C tools -f Makefile.asm8080 $(SILENT)
+man:
+	@echo "Manning the data"
+	@make -f Makefile.$@ $(SILENT)
 
-$(TOOLS_DIR)bin/tlvm:
-	@echo "Building 8 bit system"
-	@make -C tools -f Makefile.tlvm $(SILENT)
-
-$(TOOLS_DIR)bin:
-	@mkdir -v -p $(TOOLS_DIR)bin
-
-$(OBJ_DIR):
-	@mkdir -v -p $(OBJ_DIR)
-
-$(OUT_DIR):
-	@mkdir -v -p $(OUT_DIR)
-
-$(AUX_DIR):
-	@mkdir -v -p $(AUX_DIR)
-
-$(BIN_DIR):
-	@mkdir -v -p $(BIN_DIR)
-
-$(IMG_DIR):
-	@mkdir -v -p $(IMG_DIR)
-
-$(MAN_DIR):
-	@mkdir -v -p $(MAN_DIR)
-
-%.tex: %.org
-	@echo "Converting org-mode file $< to LaTeX"
-	@emacs $< --batch -f org-latex-export-to-latex --kill $(SILENT)
-
-%.pdf: %.tex
-	@echo "Converting LaTeX file $< to PDF"
-	@pdflatex $< $(SILENT)
-	@echo "Tidying output..."
-	@install -m 644 -t $(OBJ_DIR) $<
-	@install -m 644 -t $(AUX_DIR) $(<:.tex=.aux)
-	@install -m 644 -t $(AUX_DIR) $(<:.tex=.log)
-	@install -m 644 -t $(AUX_DIR) $(<:.tex=.out)
-	@rm -fr $<
-	@rm -fr $(<:.tex=.aux)
-	@rm -fr $(<:.tex=.log)
-	@rm -fr $(<:.tex=.out)
-
-%.6: %.org
-	@echo "Converting org-mode file $< to man-pages"
-	@lua utils/org-to-man.lua $<
-
-$(OUT_DIR)/%.pdf: %.pdf
-	@install -m 644 -t $(OUT_DIR) $<
-	@rm $<
-
-src/cv.dat.h:
-	@sh ./utils/embed.sh cv.org
-
-cv.out: src/cv.dat.h src/main.l.h
-	@echo "Building executable"
-	@gcc -o $@ src/*.c $(CFLAGS)
-
-src/main.l.h:
-	@echo "Processing lisp"
-	@python3 ./utils/embed_lisp.py src/main.l
-
-$(BIN_DIR)/cv: cv.out
-	@mv $< $(BIN_DIR)/cv
-
-$(MAN_DIR)/cv.6: cv.6
-	@mv $< $(MAN_DIR)/cv.6
-
-$(IMG_DIR)/%.png : $(BIN_DIR)/$(OVERVIEW)
-	$(TOOLS_DIR)/bin/tlvm | pnm2png > $@
+pdf:
+	@echo "Compiling scrolls to make the perfect document"
+	@make -f Makefile.$@ $(SILENT)
 
 clean:
 	@echo "Cleaning output directories"

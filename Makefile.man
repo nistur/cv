@@ -1,0 +1,14 @@
+OUT_DIR=out/man
+
+OUTPUT=philippgeyer.6
+
+.PHONY: all dir clean
+
+all: dir
+	@lua utils/org-to-man.lua cv.org $(OUT_DIR)/$(OUTPUT)
+
+dir:
+	@mkdir -v -p $(OUT_DIR)
+
+clean:
+	rm -f $(OUT_DIR)/$(OUTPUT)

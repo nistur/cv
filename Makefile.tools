@@ -1,0 +1,14 @@
+TOOLS_DIR=tools/
+
+.PHONY: all dirs clean
+
+all: dirs
+	@make -C $(TOOLS_DIR) -f Makefile.asm8080
+	@make -C $(TOOLS_DIR) -f Makefile.tlvm
+
+dirs:
+	@mkdir -v -p $(TOOLS_DIR)/bin
+
+clean:
+	@make -C $(TOOLS_DIR) -f Makefile.asm8080 clean
+	@make -C $(TOOLS_DIR) -f Makefile.tlvm clean

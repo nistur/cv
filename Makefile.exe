@@ -1,0 +1,35 @@
+OBJ_DIR=out/obj
+OUT_DIR=out/bin
+SRC_DIR=src
+
+OBJS=$(OBJ_DIR)/main.o
+
+
+ORG_HEADER=$(SRC_DIR)/cv.org.h
+OUTPUT=$(OUT_DIR)/philippgeyer
+
+CC=gcc
+
+CFLAGS=
+LDFLAGS=
+
+.PHONY: dir clean
+
+$(OUTPUT): dir $(ORG_HEADER) $(OBJS)
+	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+src/cv.org.h: cv.org
+	@sh utils/embed.sh $<
+
+dir:
+	@mkdir -v -p $(OBJ_DIR)
+	@mkdir -v -p $(OUT_DIR)
+
+
+clean:
+	@rm -f $(OBJS)
+	@rm -f $(ORG_HEADER)
+	@rm -f $(OUTPUT)

@@ -1,0 +1,13 @@
+OBJCFLAGS=`gnustep-config --objc-flags --objc-libs` -lobjc -lgnustep-base
+
+FILES=src/render/main.m	  	\
+	src/render/row.m	\
+	src/render/char.m	\
+	src/render/glyph.m	\
+	src/render/glyphtable.m	\
+	src/render/renderer.m
+
+OUTPUT=out/bin/render
+
+$(OUTPUT):
+	gcc -o $(OUTPUT) $(FILES) $(OBJCFLAGS)

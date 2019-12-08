@@ -8,7 +8,7 @@ This is not intended to be general purpose, but instead is tailored towards
 the specific and rather silly goal of exporting my CV.
 ]]--
 local org_path = arg[1]
-local man_path = org_path:gsub(".org",".6")
+local man_path = arg[2] or org_path:gsub(".org",".6")
 
 local man_file = io.open( man_path, "w+" )
 
