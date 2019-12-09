@@ -16,7 +16,6 @@
     {
 	[renderer renderCharacter:c];
     }
-    printf("\n");
 }
 
 -(void) addCharacter:(char)c

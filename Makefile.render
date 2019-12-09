@@ -5,7 +5,8 @@ FILES=src/render/main.m	  	\
 	src/render/char.m	\
 	src/render/glyph.m	\
 	src/render/glyphtable.m	\
-	src/render/renderer.m
+	src/render/renderer.m	\
+	src/render/framebuffer.m
 
 OUTPUT=out/bin/render
 

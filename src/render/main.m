@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "row.h"
 #import "renderer.h"
+#import "framebuffer.h"
 
 char CHAR_H[] = {
     0b11000110,
@@ -10,6 +11,7 @@ char CHAR_H[] = {
     0b11000110,
     0b11000110,
     0b11111110,
+    0b11111110,
     0b11000110,
     0b11000110,
     0b11000110,
@@ -17,7 +19,44 @@ char CHAR_H[] = {
     0b11000110,
     0b11000110,
     0b11000110,
-    0b11000110,
+    0b00000000
+};
+
+char CHAR_e[] = {
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00011100,
+    0b01100110,
+    0b01111110,
+    0b01100000,
+    0b01100000,
+    0b01100110,
+    0b00111100,
+    0b00000000
+};
+
+char CHAR_o[] = {
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+    0b00011100,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b00111100,
     0b00000000
 };
 
@@ -41,9 +80,12 @@ int main(int argc, char** argv)
 
     GlyphTable* table = [GlyphTable new];
     [table addGlyphForCharacter:'H' withData:CHAR_H];
-    Renderer* renderer = [Renderer rendererWithGlyphTable:table];
-    
+    [table addGlyphForCharacter:'e' withData:CHAR_e];
+    [table addGlyphForCharacter:'o' withData:CHAR_o];
+    Framebuffer* fb = [Framebuffer framebufferWithWidth:640 andHeight:400 andDepth:1];
+    Renderer* renderer = [Renderer rendererWithGlyphTable:table andFramebuffer:fb];
     [row renderWithRenderer:renderer];
+    [fb print];
 
     [table release];
     

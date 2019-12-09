@@ -12,7 +12,7 @@
 
 -(void) print
 {
-    printf("%c", m_c);
+//    printf("%c", m_c);
 }
 
 -(void) setChar:(char)c
