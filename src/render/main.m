@@ -63,33 +63,48 @@ char CHAR_o[] = {
 int main(int argc, char** argv)
 {
     NSAutoreleasePool* pool = [NSAutoreleasePool new];
-    Row* row = [Row new];
+    NSMutableArray* array = [NSMutableArray arrayWithCapacity:25];
+    {
+	NSInteger i;
+	NSFileHandle* input = [NSFileHandle fileHandleWithStandardInput];
+	NSData* inputData = [input availableData];
+	NSString* string = [[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding];
 
-    [row addCharacter:'H'];
-    [row addCharacter:'e'];
-    [row addCharacter:'l'];
-    [row addCharacter:'l'];
-    [row addCharacter:'o'];
-    [row addCharacter:','];
-    [row addCharacter:' '];
-    [row addCharacter:'W'];
-    [row addCharacter:'o'];
-    [row addCharacter:'r'];
-    [row addCharacter:'l'];
-    [row addCharacter:'d'];
+	Row* row = [Row new];
+	[array addObject:row];
+	
+	for(i = 0; i < string.length; ++i)
+	{
+	    if([row addCharacter:[string characterAtIndex:i]])
+	    {
+		row = [row new];
+		[array addObject:row];
+	    }
+	}
+    }
 
+    
     GlyphTable* table = [GlyphTable new];
     [table addGlyphForCharacter:'H' withData:CHAR_H];
     [table addGlyphForCharacter:'e' withData:CHAR_e];
     [table addGlyphForCharacter:'o' withData:CHAR_o];
     Framebuffer* fb = [Framebuffer framebufferWithWidth:640 andHeight:400 andDepth:1];
     Renderer* renderer = [Renderer rendererWithGlyphTable:table andFramebuffer:fb];
-    [row renderWithRenderer:renderer];
+    
+    for(Row* row in array)
+    {
+	[row renderWithRenderer:renderer];
+    }
+    
     [fb print];
 
     [table release];
-    
-    [row release];
+
+    for(Row* row in array)
+    {
+	[row release];
+    }
+    [array release];
 
     [pool drain];
     

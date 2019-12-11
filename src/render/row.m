@@ -18,9 +18,10 @@
     }
 }
 
--(void) addCharacter:(char)c
+-(BOOL) addCharacter:(char)c
 {
     [m_row addObject:[Char newWithChar:c]];
+    return [m_row count] == 80;
 }
 
 @end

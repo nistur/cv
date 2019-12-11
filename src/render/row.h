@@ -8,5 +8,5 @@
     NSMutableArray* m_row;
 }
 -(void) renderWithRenderer:(Renderer*)renderer;
--(void) addCharacter:(char)c;
+-(BOOL) addCharacter:(char)c;
 @end

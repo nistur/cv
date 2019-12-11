@@ -10,10 +10,14 @@ FILES=src/render/main.m	  	\
 
 OUTPUT=out/bin/render
 
-.PHONY: clean
+.PHONY: clean dir
 
-$(OUTPUT):
+$(OUTPUT): dir
 	gcc -o $(OUTPUT) $(FILES) $(OBJCFLAGS)
+
+
+dir:
+	mkdir -v -p out/bin
 
 clean:
 	@rm -rf $(OUTPUT)
