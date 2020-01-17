@@ -8,5 +8,6 @@
 }
 
 -(void) addGlyphForCharacter:(unsigned char)c withData:(char*)d;
+-(void) addGlyphForUnknownWithData:(char*)d;
 -(Glyph*) glyphFromCharacter:(unsigned char)c;
 @end

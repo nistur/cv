@@ -1,5 +1,5 @@
 silent
-file out/bin/1page.bin 0
+file out/bin/8080.bin 0
 memory 0x0200 0x5E00
 memory 0x8000 0x4000
 i 1 0 2

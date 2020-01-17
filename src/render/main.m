@@ -60,6 +60,25 @@ char CHAR_o[] = {
     0b00000000
 };
 
+char CHAR_UNKNOWN[] = {
+    0b00000000,
+    0b00111100,
+    0b01100110,
+    0b01000010,
+    0b01011010,
+    0b01001010,
+    0b01001010,
+    0b01011010,
+    0b01010010,
+    0b01000010,
+    0b01010010,
+    0b01100110,
+    0b00111100,
+    0b00000000,
+    0b00000000,
+    0b00000000,
+};
+
 int main(int argc, char** argv)
 {
     NSAutoreleasePool* pool = [NSAutoreleasePool new];
@@ -77,11 +96,13 @@ int main(int argc, char** argv)
     [row addCharacter:'r'];
     [row addCharacter:'l'];
     [row addCharacter:'d'];
-
+    
     GlyphTable* table = [GlyphTable new];
     [table addGlyphForCharacter:'H' withData:CHAR_H];
     [table addGlyphForCharacter:'e' withData:CHAR_e];
     [table addGlyphForCharacter:'o' withData:CHAR_o];
+    [table addGlyphForUnknownWithData:CHAR_UNKNOWN];
+    
     Framebuffer* fb = [Framebuffer framebufferWithWidth:640 andHeight:400 andDepth:1];
     Renderer* renderer = [Renderer rendererWithGlyphTable:table andFramebuffer:fb];
     [row renderWithRenderer:renderer];

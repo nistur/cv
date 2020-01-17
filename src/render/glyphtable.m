@@ -13,6 +13,19 @@
     m_table[c] = [Glyph newGlyphWithData:d];
 }
 
+-(void) addGlyphForUnknownWithData:(char*)d
+{
+    Glyph* unknownGlyph = [Glyph newGlyphWithData:d];
+    unsigned char i = 0;
+    for(i ; i < 0xFF; ++i)
+    {
+	if( m_table[i] == nil )
+	{
+	    m_table[i] = unknownGlyph;
+	}
+    }
+}
+
 -(Glyph*) glyphFromCharacter:(unsigned char)c
 {
     return m_table[c];

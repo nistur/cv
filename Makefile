@@ -5,7 +5,7 @@ SRC_DIR=src/
 
 SILENT=2>/dev/null > /dev/null
 
-PROJS=exe render tools man pdf
+PROJS=exe render tools man pdf 1page
 
 .PHONY: all clean $(PROJS)
 
@@ -29,6 +29,11 @@ man:
 
 pdf:
 	@echo "Compiling scrolls to make the perfect document"
+	@make -f Makefile.$@ $(SILENT)
+
+
+1page:
+	@echo "Finding a page"
 	@make -f Makefile.$@ $(SILENT)
 
 clean:

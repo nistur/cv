@@ -1,0 +1,31 @@
+OUT_DIR=out/
+TOOLS_DIR=tools/bin/
+SRC_DIR=src/1page/
+
+AS=$(TOOLS_DIR)/asm8080
+VM=$(TOOLS_DIR)/tlvm
+RENDERER=$(OUT_DIR)/bin/render
+PNMTOPNG=pnm2png
+
+OBJS=$(OUT_DIR)/png/8080.png
+
+.PHONY: all dirs clean
+
+all: dirs $(OBJS)
+
+$(OUT_DIR)/png/%.png: $(OUT_DIR)/bin/%.bin
+	@$(VM) | $(RENDERER) | $(PNMTOPNG) > $@
+
+$(OUT_DIR)/bin/%.bin: $(SRC_DIR)/%.s
+	@$(AS) -o$(@:.bin=) $<
+	@mv $(@:.bin=.hex) $(OUT_DIR)/obj
+
+dirs:
+	@mkdir -v -p $(OUT_DIR)/bin
+	@mkdir -v -p $(OUT_DIR)/obj
+	@mkdir -v -p $(OUT_DIR)/png
+
+clean:
+	@rm -f $(OBJS)
+	@rm -f $(OUT_DIR)/bin/*.bin
+	@rm -f $(OUT_DIR)/obj/*.hex

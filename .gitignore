@@ -1,3 +1,4 @@
 out/
 src/*.org.h
-src/*.l.h
+tools/bin/*
+tools/obj/*
