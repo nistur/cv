@@ -17,7 +17,7 @@
 {
     Glyph* unknownGlyph = [Glyph newGlyphWithData:d];
     unsigned char i = 0;
-    for(i ; i < 0xFF; ++i)
+    for(i=0 ; i < 0xFF; ++i)
     {
 	if( m_table[i] == nil )
 	{

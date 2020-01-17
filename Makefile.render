@@ -1,19 +1,28 @@
 OBJCFLAGS=`gnustep-config --objc-flags --objc-libs` -lobjc -lgnustep-base
 
-FILES=src/render/main.m	  	\
-	src/render/row.m	\
-	src/render/char.m	\
-	src/render/glyph.m	\
-	src/render/glyphtable.m	\
-	src/render/renderer.m	\
-	src/render/framebuffer.m
+SRC_DIR=src/render/
+DAT_DIR=dat/
+
+FILES=$(SRC_DIR)/main.m	  	\
+	$(SRC_DIR)/row.m	\
+	$(SRC_DIR)/char.m	\
+	$(SRC_DIR)/glyph.m	\
+	$(SRC_DIR)/glyphtable.m	\
+	$(SRC_DIR)/renderer.m	\
+	$(SRC_DIR)/framebuffer.m
+
+FONT=font
+
 
 OUTPUT=out/bin/render
 
 .PHONY: clean
 
-$(OUTPUT):
+$(OUTPUT): $(SRC_DIR)/$(FONT).h
 	gcc -o $(OUTPUT) $(FILES) $(OBJCFLAGS)
+
+$(SRC_DIR)/$(FONT).h: $(DAT_DIR)/$(FONT).bmp
+	utils/embed_font.py $< > $@
 
 clean:
 	@rm -rf $(OUTPUT)
