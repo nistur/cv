@@ -16,13 +16,16 @@ FONT=font
 
 OUTPUT=out/bin/render
 
-.PHONY: clean
+.PHONY: clean dir
 
-$(OUTPUT): $(SRC_DIR)/$(FONT).h
+$(OUTPUT): $(SRC_DIR)/$(FONT).h dir
 	gcc -o $(OUTPUT) $(FILES) $(OBJCFLAGS)
 
 $(SRC_DIR)/$(FONT).h: $(DAT_DIR)/$(FONT).bmp
 	utils/embed_font.py $< > $@
+
+dir:
+	mkdir -v -p out/bin
 
 clean:
 	@rm -rf $(OUTPUT)

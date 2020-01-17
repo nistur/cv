@@ -1,0 +1,17 @@
+|    | x0  | x1         | x2      | x3     | x4    | x5    | x6       | x7  | x8  | x9     | xA      | xB     | xC    | xD    | xE       | xF  |
+| 0x | NOP | LXI B,d16  | STAX B  | INX B  | INR B | DCR B | MVI B,d8 | RLC | NOP | DAD B  | LDAX B  | DCX B  | INR C | DCR C | MVI C,d8 | RRC |
+| 1x | NOP | LXI D,d16  | STAX D  | INX D  | INR D | DCR D | MVI D,d8 | RAL | NOP | DAD D  | LDAX D  | DCX D  | INR E | DCR E | MVI E,d8 | RAR |
+| 2x | NOP | LXI H,d16  | SHLD    | INX H  | INR H | DCR H | MVI H,d8 | DAA | NOP | DAD H  | LHLD    | DCX H  | INR L | DCR L | MVI L,d8 | CMA |
+| 3x | NOP | LXI SP,d16 | STA a16 | INX SP | INR M | DCR M | MVI M,d8 | STC | NOP | DAD SP | LDA a16 | DCX SP | INR A | DCR A | MVI A,d8 | CMC |
+| 4x |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| 5x |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| 6x |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| 7x |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| 8x |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| 9x |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| Ax |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| Bx |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| Cx |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| Dx |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| Ex |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |
+| Fx |     |            |         |        |       |       |          |     |     |        |         |        |       |       |          |     |

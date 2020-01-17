@@ -8,20 +8,25 @@
 int main(int argc, char** argv)
 {
     NSAutoreleasePool* pool = [NSAutoreleasePool new];
-    Row* row = [Row new];
+    NSMutableArray* array = [NSMutableArray arrayWithCapacity:25];
+    {
+	NSInteger i;
+	NSFileHandle* input = [NSFileHandle fileHandleWithStandardInput];
+	NSData* inputData = [input availableData];
+	NSString* string = [[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding];
 
-    [row addCharacter:'H'];
-    [row addCharacter:'E'];
-    [row addCharacter:'L'];
-    [row addCharacter:'L'];
-    [row addCharacter:'O'];
-    [row addCharacter:','];
-    [row addCharacter:' '];
-    [row addCharacter:'W'];
-    [row addCharacter:'O'];
-    [row addCharacter:'R'];
-    [row addCharacter:'L'];
-    [row addCharacter:'D'];
+	Row* row = [Row new];
+	[array addObject:row];
+	
+	for(i = 0; i < string.length; ++i)
+	{
+	    if([row addCharacter:[string characterAtIndex:i]])
+	    {
+		row = [Row new];
+		[array addObject:row];
+	    }
+	}
+    }
     
     GlyphTable* table = [GlyphTable new];
     unsigned char c = 0;
@@ -32,12 +37,21 @@ int main(int argc, char** argv)
     
     Framebuffer* fb = [Framebuffer framebufferWithWidth:640 andHeight:400 andDepth:1];
     Renderer* renderer = [Renderer rendererWithGlyphTable:table andFramebuffer:fb];
-    [row renderWithRenderer:renderer];
+    
+    for(Row* row in array)
+    {
+	[row renderWithRenderer:renderer];
+    }
+    
     [fb print];
 
     [table release];
-    
-    [row release];
+
+    for(Row* row in array)
+    {
+	[row release];
+    }
+    [array release];
 
     [pool drain];
     

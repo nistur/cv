@@ -5,23 +5,34 @@ This is my CV. It is provided in emacs org-mode. It is then exported with a LaTe
 
 This is not meant to necessarily be so that anyone can grab and build PDFs of my CV, although they can, it's just a way for me to play around with various languages and tech in a vaguely relevant manner. PDF versions of my CV are available in the Releases section.
 
-Tested software used to build the CV PDFs:
+Tested software used to build the CV in its various forms:
 - emacs 24.5.1
 - org-mode
 - pdfTex 3.14159265
 - texlive-full (I don't know right now which bits of texlive I'm actually using)
 - GNU Make 4.1
+- gcc 8.3.0
+- gcc-objc 8.3.0
+- GNUstep 1.2.6
+- Bash 5.0.3
 
-In order to build the CV PDF:
+In order to build the whole CV project:
 ```make```
 
-Also added to the repository now is a small C program that will provide the contents of the CV on the command line. This is currently just as a place where I can dump a few more code samples, rather than a complete project. It will also be built with ```make``` above, and can be invoked with ```out/bin/cv``` which will show the available flags. It also contains a very basic lisp interpreter, which currently does very little. Oh, and ```make``` will also compile the CV into a troff formatted unit man-page. Because why not.
+There are subprojects for the various output types. These can be invoked on their own by calling `make ${SUBPROJ}` where `${SUBPROJ}` is one of the following
+- `exe`
+- `man`
+- `pdf`
+- `render`
+- `tools`
+
+Currently the three that produce my CV in some output form or another are `pdf` for the PDF version, `exe` for a small executable version, written in C, and `man` for a troff formatted unit man-page. Future work will add more.
 
 Output files
 -------------
-- out/pdf/cv.pdf - The PDF that you probably want.
-- out/bin/cv - Executable version of the CV.
-- out/man/cv.6 - man-page version of the CV.
+- out/pdf/philippgeyer.pdf - The PDF that you probably want.
+- out/bin/philippgeyer - Executable version of the CV.
+- out/man/philippgeyer.6 - man-page version of the CV.
 
 FAQs
 -----
