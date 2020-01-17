@@ -6,6 +6,8 @@
     Renderer* renderer = [Renderer new];
     renderer->m_table = table;
     renderer->m_framebuffer = fb;
+    renderer->x = 0;
+    renderer->y = 0;
     return renderer;
 }
 
