@@ -20,7 +20,7 @@
 	[glyph renderAtX:x andY:y toFramebuffer:m_framebuffer];
     };
     x += 8;
-    if(x > 640)
+    if(x >= 640)
     {
 	x = 0;
 	y += 16;
