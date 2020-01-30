@@ -17,7 +17,7 @@ $(OUT_DIR)/png/%.png: $(OUT_DIR)/bin/%.bin
 	@$(VM) | $(RENDERER) | $(PNMTOPNG) > $@
 
 $(OUT_DIR)/bin/%.bin: $(SRC_DIR)/%.s
-	@$(AS) -o$(@:.bin=) $<
+	@$(AS) -o$(@:.bin=)  -I$(SRC_DIR) $<
 	@mv $(@:.bin=.hex) $(OUT_DIR)/obj
 
 dirs:
