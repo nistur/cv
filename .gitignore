@@ -3,3 +3,4 @@ src/*.org.h
 src/*/font.h
 tools/bin/*
 tools/obj/*
+*~
