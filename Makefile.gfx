@@ -1,0 +1,19 @@
+OUT_DIR=out/
+SRC_DIR=src/gfx/
+BIN_DIR=$(OUT_DIR)/bin/
+
+TARGET=$(BIN_DIR)/gfx.exe
+
+CS=mcs
+
+.PHONY: all dirs clean
+
+all: dirs $(TARGET)
+
+$(TARGET):
+	@mcs -out:$@ $(SRC_DIR)/*.cs
+dirs:
+	@mkdir -v -p $(OUT_DIR)/bin
+
+clean:
+	@rm -f $(TARGET)
