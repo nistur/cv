@@ -32,14 +32,18 @@ support.
 ** Lead Programmer, Funsolve
 February 2019 until December 2019
 
-+ Jumanji (C++, Blueprints/Unreal) https://philippgeyer.co.uk/cv/18.html
++ Jumanji (C++, Blueprints/Unreal)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/18.html
 
 Took over ownership of existing project and lead team to create a
 multiplayer cooperative adventure game, shipping on four
 platforms. Scheduled code resources, and helped scope the project to
 meet deadlines
  
-+ HotWheels Ultimate Garage (C#/Unity3D) (Unreleased) https://philippgeyer.co.uk/cv/19.html
++ HotWheels Ultimate Garage (C#/Unity3D) (Unreleased)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/19.html
 
 Worked with client to help develop a toys-to-life style experience for
 young kids. Worked closely with design to flesh out the code design,
@@ -49,13 +53,17 @@ code.
 ** Senior Programmer, Hugo Games/5th Planet Games
 February 2018 until January 2019
 
-+ Doodle Jump Space Chase (C#/Unity3D) https://philippgeyer.co.uk/cv/16.html
++ Doodle Jump Space Chase (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/16.html
 
 Acted as senior programmer on existing existing project, working to
 identify areas that could be improved in both game code, and editor
 tooling.
 
-+ Vikings (C#/Unity3D) (Unreleased) https://philippgeyer.co.uk/cv/17.html
++ Vikings (C#/Unity3D) (Unreleased)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/17.html
 
 Worked as technical lead on project, leading multiple programmers,
 both in house and external, establishing procedures, practices and
@@ -65,7 +73,9 @@ and systems for team to use.
 ** Contract Programmer, Pixel Toys
 August 2017 until December 2017
 
-+ Freeblade (C#/Unity3D) https://philippgeyer.co.uk/cv/15.html
++ Freeblade (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/15.html
 
 Contract programmer helping with porting existing project to tvOS and
 architecting a system to migrate existing cloud save data on iOS to
@@ -74,8 +84,12 @@ new format while maintaining high confidence that no data would be lost.
 ** Senior Programmer, Viewpoint Games
 June 2016 until October 2017
 
-+ Hungry Shark VR (C#/Unity3D) https://philippgeyer.co.uk/cv/13.html
-+ Ghosts in the Toybox (C#/Unity3D) https://philippgeyer.co.uk/cv/14.html
++ Hungry Shark VR (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/13.html
++ Ghosts in the Toybox (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/14.html
 
 Senior Programmer, leading a multidisciplinary team on several
 projects, and prototypes. Design, architect and implement game from
@@ -85,10 +99,18 @@ titles, both for mobile VR and for consoles.
 ** Programmer, FreeStyleGames
 May 2013 until May 2016
 
-+ Guitar Hero Live (C++) https://philippgeyer.co.uk/cv/09.html
-+ Guitar Hero Live Companion App (C#/Unity3D) https://philippgeyer.co.uk/cv/10.html
-+ Call of Duty: Online (Actionscript) https://philippgeyer.co.uk/cv/11.html
-+ Call of Duty: Ghosts Companion App (C#/Unity3D) (Unreleased) https://philippgeyer.co.uk/cv/12.html
++ Guitar Hero Live (C++)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/09.html
++ Guitar Hero Live Companion App (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/10.html
++ Call of Duty: Online (Actionscript)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/11.html
++ Call of Duty: Ghosts Companion App (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/12.html
 
 Software engineer on several projects, providing user interface,
 gameplay and systems architecture. Also worked on a small R&D team
@@ -101,18 +123,28 @@ January 2013 until May 2013
 
 Lead software engineer on four iOS and Android
 projects. (C#/C++/Unity3D/Cocos2DX) (unreleased)
-https://philippgeyer.co.uk/cv/07.html
-https://philippgeyer.co.uk/cv/08.html
 
 ** Programmer, Ideaworks Game Studio
 May 2010 until January 2013
 
-+ Lara Croft and the Guardian of Light (C++) https://philippgeyer.co.uk/cv/01.html
-+ Transformers 3: Dark of the Moon (C++) https://philippgeyer.co.uk/cv/02.html
-+ Call of Duty Black Ops: Zombies (C++) https://philippgeyer.co.uk/cv/03.htmlhttps://philippgeyer.https://philippgeyer.
-+ Backbreaker 2: Vengeance (C++) https://philippgeyer.co.uk/cv/04.html
-+ Wipeout (C#/Unity3D) https://philippgeyer.co.uk/cv/05.html
-+ Marmalade Juice (C++/Obj-C) https://philippgeyer.co.buk/cv/06.html
++ Lara Croft and the Guardian of Light (C++)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/01.html
++ Transformers 3: Dark of the Moon (C++)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/02.html
++ Call of Duty Black Ops: Zombies (C++)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/03.html
++ Backbreaker 2: Vengeance (C++)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/04.html
++ Wipeout (C#/Unity3D)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/05.html
++ Marmalade Juice (C++/Obj-C)
+  #+LATEX: \hfill
+  https://philippgeyer.co.uk/cv/06.html
   
 Software engineer on major iOS titles, providing User Interface
 programming as well as gameplay, graphics and system
@@ -133,13 +165,14 @@ usable workflows when creating the games.
 degree
 + Honours project topic: "Can information dissipate over time to
   create a dynamic social environment to aid in game immersion?"
-  http://tiara.nistur.com Also studied network programming, artificial
-  intelligence and advanced game techniques.
+  Also studied network programming, artificial intelligence and
+  advanced game techniques.
+#+BEGIN_COMMENT
 + Also studied mathematics throughout the course, graphics programming
   using DirectX and OpenGL, fames tool programming using Lex/Yacc,
   dynamic terrain generation, console game development, sound
   programming and and took part in a multidisciplinary group project
-
+#+END_COMMENT
 * Hobbies and Interests
 
 ** Programming
@@ -151,8 +184,6 @@ contributed to the Open Source game engine Maratis 3D. I have also
 started a number of small projects whose aim is to experiment in
 approaching different programming projects which have become a
 collection of "Tiny Little" libraries.
-
-http://nistur.com/projects/libraries
 
 ** Playing Games
 In what free time I have available, I have always enjoyed playing
