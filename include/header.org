@@ -1,7 +1,7 @@
 #+MACRO: FIRST    Philipp
 #+MACRO: LAST     Geyer
 #+MACRO: FULL     {{{FIRST}}} {{{LAST}}}
-#+MACRO: BLOG     http://nistur.com
+#+MACRO: BLOG     https://philippgeyer.co.uk
 #+MACRO: EMAIL    philipp@geyer.co.uk
 #+MACRO: PHONE    +44 798 453 80 13
 #+MACRO: CODE     https://github.com/nistur
