@@ -4,3 +4,4 @@ src/*/font.h
 tools/bin/*
 tools/obj/*
 *~
+cv.log
