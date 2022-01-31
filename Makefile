@@ -5,7 +5,8 @@ SRC_DIR=src/
 
 SILENT=2>/dev/null > /dev/null
 
-PROJS=exe render tools man pdf 1page
+#PROJS=exe render tools man pdf 1page
+PROJS=exe tools man pdf
 
 .PHONY: all clean $(PROJS)
 
