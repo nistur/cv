@@ -1,8 +1,13 @@
-#+OPTIONS: toc:nil H:10 tex:t date:nil
+#+OPTIONS: toc:nil H:10 tex:t date:nil author:nil
 #+TITLE: Curriculum Vitae
 #+STARTUP: hidestars indent
 #+LaTeX_HEADER: \usepackage{mycv}
 #+LaTeX_HEADER: \hypersetup{colorlinks=true, urlcolor={url-gray}}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancyplain}
+#+LATEX_HEADER: \lhead{} \rhead{} \chead{}
+#+LATEX_HEADER: \rfoot{\href{mailto:philipp@geyer.co.uk}{philipp@geyer.co.uk}}
+#+LATEX_HEADER: \cfoot{\color{watermark-gray}NO PERMISSION IS GIVEN TO EDIT THIS DOCUMENT}
 #+LaTeX_CLASS_OPTIONS: [a4paper,8pt]
 
 #+INCLUDE: include/header.org
@@ -11,6 +16,7 @@
 #+MAN_MACRO: CONTACT {_EMAIL_}
 
 * Personal Information
+#+LATEX: \break
 I am a confident and competent programmer with a keen interest in
 making video games. I have had experience both developing and using
 many different platforms and environments. I have worked well in teams
@@ -18,12 +24,24 @@ of various sizes with multiple disciplines.  I am a keen problem
 solver, enjoy investigating how things work and relish a
 challenge.
 
+* Skills
++ Experience developing for mobile, console and desktop and with VR/AR
++ Confident using Windows, macOS, and Linux systems.
++ Experience using a variety of game engines and frameworks including
+  Unity3D, Unreal 4, and Marmalade.
++ Comfortable with a wide range of progreamming languages including
+  C/C++, Objective C, C#, Java, Lua, Python, Lisp, ASM.
++ Experience setting up cloud infrastructure using services such as AWS.
+
 * Experience
+#+LATEX: \hfill
+#+LATEX: \vspace{-6mm}
+https://philippgeyer.co.uk/cv/00.html
+#+LATEX: \break
 ** Senior Programmer, CUEi
 January 2020 until present
 
 + Various (C++, Blueprints/Unreal)
-
 Provided development and maintenance for several projects including VR
 training simulations, and offline photorealistic rendering
 solutions. Provided communication with clients, as well as code
@@ -33,18 +51,12 @@ support.
 February 2019 until December 2019
 
 + Jumanji (C++, Blueprints/Unreal)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/18.html
-
 Took over ownership of existing project and lead team to create a
 multiplayer cooperative adventure game, shipping on four
 platforms. Scheduled code resources, and helped scope the project to
 meet deadlines
  
-+ HotWheels Ultimate Garage (C#/Unity3D) (Unreleased)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/19.html
-
++ HotWheels Ultimate Garage (C#/Unity3D)
 Worked with client to help develop a toys-to-life style experience for
 young kids. Worked closely with design to flesh out the code design,
 while prototyping features and creating a basis for the production
@@ -54,17 +66,11 @@ code.
 February 2018 until January 2019
 
 + Doodle Jump Space Chase (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/16.html
-
-Acted as senior programmer on existing existing project, working to
+Acted as senior programmer on existing project, working to
 identify areas that could be improved in both game code, and editor
 tooling.
 
-+ Vikings (C#/Unity3D) (Unreleased)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/17.html
-
++ Vikings (C#/Unity3D)
 Worked as technical lead on project, leading multiple programmers,
 both in house and external, establishing procedures, practices and
 workflows. Established architecture for online game and built tools
@@ -74,9 +80,6 @@ and systems for team to use.
 August 2017 until December 2017
 
 + Freeblade (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/15.html
-
 Contract programmer helping with porting existing project to tvOS and
 architecting a system to migrate existing cloud save data on iOS to
 new format while maintaining high confidence that no data would be lost.
@@ -85,11 +88,7 @@ new format while maintaining high confidence that no data would be lost.
 June 2016 until October 2017
 
 + Hungry Shark VR (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/13.html
 + Ghosts in the Toybox (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/14.html
 
 Senior Programmer, leading a multidisciplinary team on several
 projects, and prototypes. Design, architect and implement game from
@@ -100,17 +99,9 @@ titles, both for mobile VR and for consoles.
 May 2013 until May 2016
 
 + Guitar Hero Live (C++)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/09.html
 + Guitar Hero Live Companion App (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/10.html
 + Call of Duty: Online (Actionscript)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/11.html
 + Call of Duty: Ghosts Companion App (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/12.html
 
 Software engineer on several projects, providing user interface,
 gameplay and systems architecture. Also worked on a small R&D team
@@ -122,47 +113,26 @@ detecting cameras.
 January 2013 until May 2013
 
 Lead software engineer on four iOS and Android
-projects. (C#/C++/Unity3D/Cocos2DX) (unreleased)
+projects. (C#/C++/Unity3D/Cocos2DX)
 
 ** Programmer, Ideaworks Game Studio
 May 2010 until January 2013
 
 + Lara Croft and the Guardian of Light (C++)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/01.html
 + Transformers 3: Dark of the Moon (C++)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/02.html
 + Call of Duty Black Ops: Zombies (C++)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/03.html
 + Backbreaker 2: Vengeance (C++)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/04.html
 + Wipeout (C#/Unity3D)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/05.html
 + Marmalade Juice (C++/Obj-C)
-  #+LATEX: \hfill
-  https://philippgeyer.co.uk/cv/06.html
   
 Software engineer on major iOS titles, providing User Interface
 programming as well as gameplay, graphics and system
 architecture. Have worked closely with designers and artists to create
 usable workflows when creating the games.
 
-* Skills
-+ Experience developing for mobile, console and desktop and with VR/AR
-+ Confident using Windows, macOS, and Linux systems.
-+ Experience using a variety of game engines and frameworks such as
-  Unity3D, Unreal 4, Marmalade, Maratis3D, Instinct, Sauerbraten, Oops!
-  Framework, XNA and Ogre.
-+ Comfortable with a wide range of progreamming languaes including
-  C/C++, Objective C, C#, Java, Lua, Python, Lisp, ASM.
 * Education
 ** University of Abertay, Dundee
-2006 until 2010 BSC (Hons) Computer Games Technology - Lower Second class Honours
-degree
+2006 until 2010 BSC (Hons) Computer Games Technology
 + Honours project topic: "Can information dissipate over time to
   create a dynamic social environment to aid in game immersion?"
   Also studied network programming, artificial intelligence and
@@ -173,6 +143,7 @@ degree
   dynamic terrain generation, console game development, sound
   programming and and took part in a multidisciplinary group project
 #+END_COMMENT
+
 * Hobbies and Interests
 
 ** Programming
@@ -193,5 +164,9 @@ favourites are Role Play Games such as the Final Fantasy, and The
 Elder Scrolls series' and Space Simulations such as the X series, and
 Freespace.
 
+#+LATEX:\renewcommand\fbox{}
+
 * 
+#+BEGIN_center
 If there are any further questions, feel free to contact me on {{{CONTACT}}}
+#+END_center

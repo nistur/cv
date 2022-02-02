@@ -8,7 +8,7 @@
 % https://github.com/doy/resume/blob/master/resume.tex
 
 % Packages
-\RequirePackage{latexsym,amsmath,amssymb,charter,color,calc,hyperref,titlesec}
+\RequirePackage{latexsym,amsmath,amssymb,charter,color,calc,hyperref,titlesec,xcolor}
 \RequirePackage[empty]{fullpage}
 
 %% Page margins
@@ -27,15 +27,24 @@
 % Colours for the CV - a dark red, and a grey for URLs
 \definecolor{highlight-colour}{RGB}{128, 0, 0}
 \definecolor{url-gray}{gray}{0.25}
+\definecolor{watermark-gray}{gray}{0.55}
+
+\renewcommand\fbox{\fcolorbox{highlight-colour}{highlight-colour}}
+
+\let\saveditemize=\itemize%
+\let\savedenditemize=\enditemize%
+\renewenvironment{itemize}
+                 {\vspace{-2mm}\saveditemize\setlength\itemsep{-0.5em}}
+                 {\savedenditemize}
 
 %% Document header
-\newcommand{\resheader}[6]{
+\newcommand{\resheader}[6]{\vspace{-15mm}
     \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}cr}
-    #3 & \textcolor{highlight-colour}{\textbf{\LARGE #1}} & #5\\
-    #4 & \url{#2}           & #6\\
+    #3 & \textcolor{highlight-colour}{\hspace{-5mm}\textbf{\LARGE #1}} & #5\\
+    #4 & \hspace{-5mm}\url{#2}           & #6\\
     \end{tabular*}
     \\
-    \vspace{0.05in}
+    \vspace{1mm}
 }
 
 %% Enumerations
@@ -45,12 +54,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\section}[1]{
   \@startsection{section}{1}{0pt}{0pt}{0pt}{\normalfont}*{}
-  {
-    \large \textcolor{highlight-colour}{
+                {
+                  \fbox{
+    \large \textcolor{white}{
       \begin{minipage}
         {\textwidth-0.175in}
         {\textbf{#1 \vphantom{p\^{E}}}}
       \end{minipage}
+    }
     }
   }
 }
