@@ -13,8 +13,8 @@ void printHelp(const char* name)
 	   "\n"								\
 	   "Output options\n"						\
 	   " -p\tPersonal Information\n"				\
-	   " -e\tExperience\n"						\
 	   " -s\tSkills\n"						\
+	   " -e\tExperience\n"						\
 	   " -q\tQualifications\n"					\
 	   " -i\tInterests\n"						\
 	   " -c\tContact\n"						\
@@ -43,9 +43,9 @@ int main(int argc, char** argv)
 	{	
 	case 'p':
 	    CV_PARAGRAPH(00); break;
-	case 'e':
-	    CV_PARAGRAPH(01); break;
 	case 's':
+	    CV_PARAGRAPH(01); break;
+	case 'e':
 	    CV_PARAGRAPH(02); break;
 	case 'q':
 	    CV_PARAGRAPH(03); break;
